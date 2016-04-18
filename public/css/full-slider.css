@@ -1,0 +1,149 @@
+/*!
+ * Start Bootstrap - Full Slider HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+html,
+body {
+    height: 100%;
+    background-color: #23282d !important;
+    opacity: 0.95;
+}
+
+.carousel,
+.item,
+.active {
+    height: 100%;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
+/* Background images are set within the HTML using inline CSS, not here */
+
+.fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+
+header{
+    position: fixed;
+    z-index: -1;
+}
+
+.container.cont{
+    position: fixed;
+    z-index: +1;
+    margin-left: 5%;
+    margin-top: -2%;
+
+}
+
+form{
+    background-color: #778899;
+    opacity: 0.75;
+    border-radius: 5.5%;
+    padding: 15px;
+
+}
+form h2{
+    color: #23282d;
+    text-align: center;
+}
+
+form h3{
+    color: #23282d;
+    text-align: center;
+}
+
+
+form button{
+    background-color: #2f363c;
+}
+
+form button a{
+    color: #a7a9ab;
+    text-decoration: none;
+}
+
+form button a:hover{
+    color: #fff;
+    text-decoration: none;
+}
+
+footer ul.nav li a{
+    color: #fff !important;
+}
+
+footer ul.nav li a:hover{
+    color: #fff !important;
+}
+
+footer ul.nav li a:focus{
+    color: #fff !important;
+}
+
+@media (min-width: 1200px){
+    form{
+        margin-top: 20% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    form h3{
+        margin-top: 3% !important;
+    }
+}
+
+@media (max-width: 1199px) and (min-width: 992px){
+    form{
+        width: 380px;
+        margin-top: 8%;
+    }
+    form h3{
+        margin-top: 3%;
+    }
+}
+
+@media (max-width: 992px){
+    form{
+        margin-top: 8% !important;
+    }
+}
+
+@media (max-width: 767px) and (min-width: 500px){
+    form{
+        margin-top: 5% !important;
+        width: 380px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    form h3{
+        margin-top: 3% !important;
+    }
+    form button{
+        height: 40px;
+    }
+    form img{
+        height: 140px !important;
+    }
+}
+
+@media (max-width: 500px){
+    form{
+        margin-top: 20% !important;
+        width: 220px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+
+

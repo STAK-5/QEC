@@ -1,0 +1,410 @@
+*{
+    font-family: "Century Gothic";
+}
+
+
+
+#hodLogin,
+#studentRegistration,
+#studentLogin,
+#teacherRegistration,
+#hodForgot{
+    margin-top: 5%;
+    background-color: #4e5256;
+    border-radius: 35% 0% 36% 0%;!important;
+    opacity: 0.85;
+}
+
+form{
+    padding: 15px;
+}
+
+body{
+    background-color: #222222 !important;
+    color: #fdf5e6;
+
+}
+
+#hodLogin h2,
+#studentRegistration h2,
+#studentLogin h2,
+#teacherRegistration h2,
+#hodForgot h2{
+    text-align: center;
+}
+
+#hodLogin h3,
+#studentRegistration h3,
+#studentLogin h3,
+#teacherRegistration h3,
+#hodForgot h3{
+    text-align: center;
+}
+
+#hodLogin button,
+#studentRegistration button,
+#studentLogin button,
+#teacherRegistration button,
+#hodForgot button{
+    background-color: #2f363c !important;
+    color: #a7a9ab !important;
+}
+
+#hodLogin button a,
+#studentRegistration button a,
+#studentLogin button a,
+#teacherRegistration button a,
+#hodForgot button a{
+    color: #a7a9ab !important;
+    text-decoration: none;
+}
+
+#hodLogin button.btn-block a:hover,
+#studentRegistration button.btn-block a:hover,
+#studentLogin button.btn-block a:hover,
+#hodForgot button .btn-block a:hover{
+    color: #fff !important;
+    text-decoration: none;
+}
+
+#hodLogin button a:focus,
+#studentRegistration button a:focus,
+#studentLogin button a:focus,
+#teacherRegistration button a:focus,
+#hodForgot button a:focus{
+    background-color: #3b444c !important;
+    color: #fff !important;
+    text-decoration: none;
+}
+
+#hodLogin label,
+#studentRegistration label,
+#studentLogin label,
+#teacherRegistration label,
+#hodForgot label {
+    text-align: center;
+}
+
+#hodLogin label a,
+#studentRegistration label a,
+#studentLogin label a,
+#teacherRegistration label a,
+#hodForgot label a{
+    color: #a7a9ab !important;
+    text-decoration: none;
+}
+
+#hodLogin label a:hover,
+#studentRegistration label a:hover,
+#studentLogin label a:hover,
+#teacherRegistration label a:hover,
+#hodForgot label a:hover{
+    color: #fff !important;
+    text-decoration: none;
+}
+
+#hodLogin label a:focus,
+#studentRegistration label a:focus,
+#studentLogin label a:focus,
+#hodForgot label a:focus{
+    color: #fff;
+    text-decoration: none;
+}
+
+@media (min-width: 1200px){
+    #hodLogin,
+    #studentRegistration,
+    #studentLogin,
+    #hodForgot{
+        margin: 20% 0 !important;
+    }
+    #hodLogin h3,
+    #studentRegistration h3,
+    #studentLogin h3,
+    #hodForgot h3{
+        margin-top: 3% !important;
+    }
+}
+
+@media (max-width: 1199px) and (min-width: 992px){
+    #hodLogin,
+    #studentRegistration,
+    #studentLogin,
+    #teacherRegistration,
+    #hodForgot{
+        width: 380px;
+        margin-top: 30%!important;
+    }
+    #hodLogin h3,
+    #studentRegistration h3,
+    #hodForgot h3,
+    #teacherRegistration h3,
+    #hodForgot h3{
+        margin-top: 3%;
+    }
+}
+
+@media (max-width: 992px) and (min-width: 768px){
+    #hodLogin,
+    #studentRegistration,
+    #studentLogin,
+    #teacherRegistration,
+    #hodForgot{
+        margin-top: 12% !important;
+    }
+}
+
+@media (max-width: 767px) and (min-width: 500px){
+    #hodLogin,
+    #studentRegistration,
+    #studentLogin,
+    #teacherRegistration,
+    #hodForgot{
+        margin: 10% 0 !important;
+        width: 380px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    #hodLogin h3,
+    #studentRegistration h3,
+    #studentLogin h3,
+    #teacherRegistration h3,
+    #hodForgot h3{
+        margin-top: 3% !important;
+    }
+    #hodLogin button,
+    #studentRegistration button,
+    #studentLogin button,
+    #teacherRegistration button,
+    #hodForgot button{
+        height: 40px;
+    }
+    #hodLogin img,
+    #studentRegistration img,
+    #studentLogin img,
+    #teacherRegistration img,
+    #hodForgot img{
+        overflow: scroll;
+    }
+}
+
+@media (max-width: 500px){
+    #hodLogin,
+    #studentRegistration,
+    #studentLogin,
+    #teacherRegistration,
+    #hodForgot
+    {
+        margin: 17% 0 !important;
+        width: 220px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    #hodLogin label a,
+    #studentRegistration label a,
+    #studentLogin label a,
+    #teacherRegistration a,
+    #hodForgot label a{
+        display: block;
+    }
+}
+
+footer .navbar-brand {
+    color: #5DAEE6!important;
+    font-weight: 900;
+}
+
+.dropdown-menu{
+    background-color: #1b222a !important;
+}
+
+.dropdown-menu li a:hover{
+    background-color: #339976 !important;
+}
+
+.dropdown-menu li a:focus{
+    background-color: #339976 !important;
+}
+
+.list-group{
+    height: 480px;
+    width: 300px;
+}
+
+.list-group .img-circle{
+    width: 250px;
+    height: 250px;
+    padding-bottom: 10px;
+    margin-top: 2.5%;
+    margin-left: 6%;
+}
+
+.list-group .list-group-item{
+    background-color: #1b222a;
+}
+
+.list-group a{
+    color: #fff !important;
+}
+
+.list-group a:hover{
+    background-color: #339976 !important;
+    color: #fff;
+}
+
+.list-group a:focus{
+    background-color: #339976 !important;
+    color: #fff;
+}
+
+#section{
+    padding: 90px 15px 100px;
+    text-align: center;
+    font-size: 20px;
+}
+
+#section h1{
+    font-size: 45px;
+    color: #339976 !important;
+    text-transform: uppercase;
+}
+
+#section p{
+    font-size: 20px;
+    padding-top: 20px;
+    line-height: 1.5em;
+}
+
+#stars-default{
+    padding: 20px 0px 0px;
+}
+
+.pagination{
+    position: relative;
+    top: 30px;
+}
+
+ul.pagination li a{
+    background-color: #1b222a;
+    color: #fff;
+}
+
+ul.pagination li a:hover{
+    background-color: #339976;
+    color: #fff;
+}
+
+ul.pagination li a:focus{
+    background-color: #339976;
+    color: #fff;
+}
+
+
+.top1{
+
+    margin-top: -40px;
+}
+
+
+.slide {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.bg {
+    min-height: 100%;
+    min-width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    position: fixed;
+    /*top: -250px;*/
+    z-index: -1;
+    image-rendering: auto;
+}
+
+.img {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.star-rating {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+.star-rating .star {
+    padding: 2px;
+    padding-top: 10px;
+    color: #ddd;
+    font-size: 20px;
+    text-shadow: .05em .05em #aaa;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.star-rating .star.filledRed {
+    color: #F00;
+}
+
+.star-rating .star.filledOrange {
+    color: #E89414;
+}
+
+.star-rating .star.filledYellow {
+    color: #f4e940;
+}
+
+.star-rating .star.filledGreen {
+    color: #4bb600;
+}
+
+.star-rating .star.filledDarkGreen {
+    color: #1a9f10;
+}
+
+
+
+.star-rating.readonly .star.filled {
+    color: #666;
+}
+
+#section {
+    padding-bottom: 55px;!important;
+}
+
+.line-height{
+    margin: 10px 0;
+}
+
+#black{
+    background: #000000;
+}
+
+.info{
+
+    padding-top: 375px!important;
+}
+
+.c3-axis-x text, .c3-axis-y text{
+
+    font-size:12px;
+    fill: #BCB6B6;
+    /*color: */
+
+}
+
+.c3-chart-arc text, .c3-target-tablet text{
+    fill: white!important;
+}
+
+
+.c3-legend-item text {
+    fill: white;
+}

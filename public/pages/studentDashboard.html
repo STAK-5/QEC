@@ -1,0 +1,53 @@
+<nav class="navbar navbar-inverse navbar-top-fixed">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">QEC - DUET</a>
+        </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="row" ng-init="hide = 1">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row w3-container" ng-repeat="rows in teachers" ng-cloak>
+                        <div ng-repeat="teacher in rows" class="col-lg-2 col-md-6 col-sm-4 col-xs-6 portfolio-item" ng-cloak>
+                            <div class="w3-card-24 w3-blue-grey line-height">
+                                <img id="{{ teacher.name }}" name="{{ teacher.name }}" class="line-height col-lg-12 col-xs-12 animated flipInY img-responsive" ng-src="{{ teacher.image }}" alt="{{ teacher.name }}'s Image" style="height: 150px">
+                                <a href="#/questionnaire"><button class="w3-btn-block w3-hover-border-dark-grey w3-hover-blue-grey" ng-click="logTeacher($event)" name="{{ teacher.name }}">{{teacher.name}}</button></a>
+                            </div>
+                        </div>
+                    </div><!-- /.row -->
+
+                </div>
+
+            </div><!-- end of col-md-7-->
+
+        </div><!-- end of row-->
+    </div>
+</div>
+
+<!-- /.row -->
+
+
+<!-- Footer -->
+<footer>
+    <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container">
+            <ul class="nav navbar-nav pull-right">
+                <li><a href="#/about">404 Developers</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>

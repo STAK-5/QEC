@@ -1,0 +1,99 @@
+<div ng-controller="sliderController as slider" >
+    <div class=" img slide slide-animation" ng-if="isCurrentSlideIndex($index)" ng-show="loaded" ng-repeat="slide in slides">
+        <img class="bg" ng-src="{{slide.src}}">
+
+    </div>
+</div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
+            <form novalidate id="teacherRegistration" name="teacherRegistration" role="form">
+
+                <img src="imgs/duet-up.png" class="img-responsive">
+                <h3 class = {{msgclass}}>{{msg}}</h3>
+                <div class="form-group has-feedback has-feedback-left"
+                     ng-class="{ 'has-error' :teacherRegistration.teacherRegistrationName.$touched && teacherRegistration.teacherRegistrationName.$invalid,
+                                    'has-success': teacherRegistration.teacherRegistrationName.$valid
+                        }"
+                >
+                    <input type="text"
+                           class="form-control"
+                           id="teacherRegistrationName"
+                           name="teacherRegistrationName"
+                           ng-model="teacherName"
+                           placeholder="Teacher Name"
+                           required
+                    >
+                    <i class="glyphicon glyphicon-user form-control-feedback"></i>
+                </div>
+                <div class="form-group has-feedback has-feedback-left"
+                     ng-class="{ 'has-error' :teacherRegistration.teacherRegistrationEmail.$touched && teacherRegistration.teacherRegistrationEmail.$invalid,
+                                    'has-success': teacherRegistration.teacherRegistrationEmail.$touched && teacherRegistration.teacherRegistrationEmail.$valid
+                        }"
+                >
+                    <input type="text"
+                           class="form-control"
+                           id="teacherRegistrationEmail"
+                           name="teacherRegistrationEmail"
+                           ng-model="teacherEmail"
+                           placeholder="Email"
+                           required
+                    >
+                    <i class="glyphicon glyphicon-envelope form-control-feedback"></i>
+                </div>
+                <div class="form-group has-feedback has-feedback-left"
+                     ng-class="{ 'has-error' :teacherRegistration.teacherRegistrationContact.$touched && teacherRegistration.teacherRegistrationContact.$invalid,
+                                    'has-success': teacherRegistration.teacherRegistrationContact.$touched && teacherRegistration.teacherRegistrationContact.$valid
+                        }"
+                >
+                    <input type="text"
+                           class="form-control"
+                           id="teacherRegistrationContact"
+                           name="teacherRegistrationContact"
+                           ng-model="teacherContact"
+                           placeholder="Contact No."
+                           ng-pattern="/^[0-9]{4}-[0-9]{7}$/"
+                           required
+                    >
+                    <i class="glyphicon glyphicon-phone form-control-feedback"></i>
+                </div>
+                <div class="form-group has-feedback has-feedback-left"
+                     ng-class="{ 'has-error' :teacherRegistration.teacherRegistrationDepartment.$touched && teacherRegistration.teacherRegistrationDepartment.$invalid,
+                                    'has-success': teacherRegistration.teacherRegistrationDepartment.$touched && teacherRegistration.teacherRegistrationDepartment.$valid
+                        }"
+                >
+                    <input type="text"
+                           class="form-control"
+                           id="teacherRegistrationDepartment"
+                           name="teacherRegistrationDepartment"
+                           ng-model="teacherDepartment"
+                           placeholder="Department"
+                           required
+                    >
+                    <i class="glyphicon glyphicon-education form-control-feedback"></i>
+                </div>
+                <!--<p class="{{errclass}}">{{errmsg}}</p>-->
+                <button class="btn btn-lg btn-block" href="#/" role="button"
+                        ng-disabled="teacherRegistration.$invalid" ng-click="register()">SUBMIT</button>
+                <br>
+                <img src="imgs/duet-down.png" class="img-responsive">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</header>
+
+<footer class="container">
+    <div class="nav navbar navbar-fixed-bottom">
+        <div class="container">
+            <ul class="nav">
+                <li><a class="navbar-brand pull-left" href="">DUET - Quality Enhancement Cell</a></li>
+                <li><a class="navbar-brand pull-right" href="#/about">404 Developers</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+
+

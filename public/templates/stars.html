@@ -1,0 +1,5 @@
+<ul class="star-rating">
+    <li ng-repeat="star in stars" id="{{ ratingValue }}" class="star" ng-class="{filledRed: star.filledRed, filledOrange:star.filledOrange, filledYellow: star.filledYellow, filledDarkGreen: star.filledDarkGreen, filledGreen: star.filledGreen}" ng-click="toggle($index)">
+        <i class="glyphicon glyphicon-star fa-3x"></i>
+    </li>
+</ul>

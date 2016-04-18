@@ -1,0 +1,106 @@
+<nav class="navbar navbar-inverse navbar-top-fixed">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">QEC - DUET</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav pull-right">
+                <li><a href="#/student-registration">Register Accounts</a></li>
+                <li><a href="#/add-teacher">Add teacher</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href='#/'>Logout</a></li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h3>
+    Name: {{ teacher.value }}
+</h3>
+
+
+<!--
+<div>
+    <dl ng-repeat="data in teacher">
+        <dt>{{data}}</dt>
+    </dl>
+</div>
+-->
+
+<div id="graph" class="container" ng-show="teacher.value">
+    <c3chart bindto-id="chart1">
+        <chart-legend show-legend="true" data-legend-colr="red"/>
+        <chart-colors color-pattern="#F00, #E89414, #1a9f10, #339976, #aaa"/>
+        <chart-size chart-height=275 />
+		<chart-tooltip show-tooltip="true" tooltip-name="Questions" tooltip-title="Questions">
+
+
+        <!--<chart-column column-id="x"
+                      column-values="1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18"
+        />-->
+        <chart-column font-color="red" ng-repeat="survey in surveyResults" column-id="{{survey.date}}"
+                      column-name="{{survey.date}}"
+                      column-values="{{survey.data.join(',')}}"
+                      column-type="line"/
+            <chart-axes values-x="x" values-y="{{(surveyResults.date).join(',')}}"/>
+
+            <chart-axis>
+                <chart-axis-x axis-position="outer-center"
+                              axis-label="Questions"
+                >
+                </chart-axis-x>
+                <chart-axis-y axis-id="y"
+                              axis-position="outer-middle"
+                              axis-label="Average No. of Stars"
+                              />
+                <chart-grid show-x="false" show-y="true"></chart-grid>
+            </chart-axis>
+    </c3chart>
+
+    <c3chart bindto-id="pie-plot1-chart">
+    	<chart-size chart-height=250 />
+        <chart-tooltip show-tooltip="false">
+        <chart-column column-id = "First Survey"
+                      column-values="{{ average[0] }}"
+                      column-type="pie"
+        />
+        <chart-column column-id="Second Survey"
+                      column-values="{{ average[1] }}"
+                      column-type="pie"
+        />
+        <chart-column column-id="Third Survey"
+                      column-values="{{ average[2] }}"
+                      column-type="pie"
+        />
+        <chart-column column-id="Fourth Survey"
+                      column-values="{{ average[3] }}"
+                      column-type="pie"
+        />
+        <chart-column column-id="5th Survey"
+                      column-values="{{ average[4] }}"
+                      column-type="pie"
+        />
+        <chart-pie expand="true"/>
+        <chart-legend legend-position="right"
+    </c3chart>
+
+</div>
+
+<footer>
+    <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container">
+            <ul class="nav navbar-nav pull-right">
+                <li><a href="#/about">404 Developers</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+

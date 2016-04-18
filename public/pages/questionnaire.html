@@ -1,0 +1,90 @@
+<nav class="navbar navbar-inverse navbar-top-fixed">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Quality Enhancement Cell - DUET</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-4">
+            <div id="sidebarMenu">
+                <div class="panel list-group">
+                    <img class="img-circle" ng-src="./imgs/Slider/slider/slider1.jpg">
+                    <a href="" class="list-group-item" data-toggle="collapse" data-target="#one" data-parent="#sidebarMenu">Personal info</a>
+                    <div id="one" class="sublinks collapse">
+                        <a class="list-group-item small">Name: {{ teacher }}</a>
+                        <a class="list-group-item small">2nd Item</a>
+                    </div>
+                    <a href="" class="list-group-item" data-toggle="collapse" data-target="#two" data-parent="#sidebarMenu">Subjects</a>
+                    <div id="two" class="sublinks collapse">
+                        <a class="list-group-item small">1st Item</a>
+                        <a class="list-group-item small">2nd Item</a>
+                    </div>
+                    <a href="" class="list-group-item" data-toggle="collapse" data-target="#three" data-parent="#sidebarMenu">Projects Guided</a>
+                    <div id="three" class="sublinks collapse">
+                        <a class="list-group-item small">1st Item</a>
+                        <a class="list-group-item small">2nd Item</a>
+                    </div>
+                    <a href="" class="list-group-item" data-toggle="collapse" data-target="#four" data-parent="#sidebarMenu">Education</a>
+                    <div id="four" class="sublinks collapse">
+                        <a class="list-group-item small">1st Item</a>
+                        <a class="list-group-item small">2nd Item</a>
+                    </div>
+                    <a href="" class="list-group-item" data-toggle="collapse" data-target="#five" data-parent="#sidebarMenu">Designation</a>
+                    <div id="five" class="sublinks collapse">
+                        <a class="list-group-item small">1st Item</a>
+                        <a class="list-group-item small">2nd Item</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9" ng-hide=" pageValue > 18 ">
+            <div id="section" class="repeat-animation" ng-show="pageValue == question.QuestionNum" ng-repeat="question in questions">
+                <h1>{{ question.Name }}</h1>
+                <p>{{ question.Q }}</p>
+
+                <div ng-controller="ratingController as rating">
+                    <div star-rating ng-model="ratingValue" on-rating-select="rating.rateFunction(rating)"></div>
+                    <h4 ng-show="ratingValue === 1">{{ text[0] }}</h4>
+                    <h4 ng-show="ratingValue === 2">{{ text[1] }}</h4>
+                    <h4 ng-show="ratingValue === 3">{{ text[2] }}</h4>
+                    <h4 ng-show="ratingValue === 4">{{ text[3] }}</h4>
+                    <h4 ng-show="ratingValue === 5">{{ text[4] }}</h4>
+                </div>
+
+            </div>
+            <div id="{{ pageValue }}">
+                <!--<div class="animated" ng-class="{'zoomOutUp': pageValue > 18}" ng-hide="pageValue === 19"><button class="btn w3-btn btn-lg w3-red w3-hover-blue-grey w3-show-inline-block pull-left" ng-disabled="pageValue == 1" ng-click="back()">Back</button></div>-->
+                <div class="animated" ng-class="{'zoomOutUp': pageValue > 18}" ng-hide="pageValue === 19"><button class="btn w3-btn-block btn-lg w3-green w3-hover-blue-grey w3-show-inline-block pull-right" ng-click="pageValue = pageValue+1">Next</button></div>
+
+            </div>
+        </div>
+        <div class="col-mod-9" ng-show=" pageValue > 18">
+            <div id="section2">
+                <h2 class="text-center line-height">Thank you for your time</h2>
+            </div>
+            <div class="line-height"><button class="btn center-block w3-light-green w3-hover-green" ng-click="updateDetails();">Submit & Logout</button></div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<footer>
+    <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container">
+            <ul class="nav navbar-nav pull-right">
+                <li><a href="#/about">404Developers</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+

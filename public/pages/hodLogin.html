@@ -1,0 +1,74 @@
+<div ng-controller="sliderController as slider" >
+    <div class=" img slide slide-animation" ng-if="isCurrentSlideIndex($index)" ng-show="loaded" ng-repeat="slide in slides">
+        <img class="bg" ng-src="{{slide.src}}">
+
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
+            <form novalidate id="hodLogin" name="hodLogin" role="form">
+
+                <img src="imgs/duet-up.png" class="img-responsive">
+                <h3 class="{{errclass}}">{{msg}}</h3>
+                <div class="form-group has-feedback has-feedback-left"
+                    ng-class="{'has-error': hodLogin.hodEmail.$touched && hodLogin.hodEmail.$invalid,
+                                'has-success': hodLogin.hodEmail.$valid
+                    }"
+                >
+                    <input type="email"
+                           class="form-control"
+                           id="hodEmail"
+                           name="hodEmail"
+                           ng-model="hodEmail"
+                           placeholder="Email"
+                           required
+                    >
+                    <i class="glyphicon glyphicon-envelope form-control-feedback"></i>
+                </div>
+
+                <div class="form-group has-feedback has-feedback-left"
+                     ng-class="{'has-error': hodLogin.hodPassword.$touched && hodLogin.hodPassword.$invalid,
+                                'has-success': hodLogin.hodPassword.$valid
+                    }"
+                >
+                    <input type="password"
+                           class="form-control"
+                           id="hodPassword"
+                           name="hodPassword"
+                           ng-model="hodPassword"
+                           placeholder="Password"
+                           required
+                           ng-minlength="8"
+                           ng-maxlength="16"
+                    >
+                    <i class="glyphicon glyphicon-lock form-control-feedback"></i>
+                </div>
+
+                    <button type="button" class="btn btn-lg btn-block"
+                        ng-disabled="hodLogin.$invalid" ng-click="login()"
+                >
+                    <strong>Sign In</strong></button>
+                <h5 class="text-center"><a href="#/forgot"> Forgot Password?</a></h5>
+                <img src="imgs/duet-down.png" class="img-responsive">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</header>
+
+<footer class="container">
+    <div class="nav navbar navbar-fixed-bottom">
+        <div class="container">
+            <ul class="nav">
+                <li><a class="navbar-brand pull-left" href="">DUET - Quality Enhancement Cell</a></li>
+                <li><a class="navbar-brand pull-right" href="#/about">404Developers</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+

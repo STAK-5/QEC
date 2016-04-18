@@ -1,0 +1,24 @@
+<div>
+    <img class="col-md-5" ng-src="{{teacherBio.image}}">
+    <br/>
+    <br/>
+    <div class="divider">
+        <h3>Bio Data</h3>
+        <ul>
+            <li class="list-group-item">Name: {{ teacherBio.name }}</li>
+            <li class="list-group-item">Age: {{ teacherBio.age}}</li>
+            <li class="list-group-item">Gender:{{ teacherBio.gender}}</li>
+            <li class=" list-group-item">Subjects:
+                <ul class="" ng-repeat="subject in teacherBio.subjects">
+                    <li class="list-group-item">{{ subject}}</li>
+                </ul>
+            </li>
+            <li class="list-group-item">Projects:
+                <ul class="" ng-repeat="project in teacherBio.projects">
+                    <li class="list-group-item">{{ project }}</li>
+                </ul>
+            </li>
+        </ul>
+        <h3>Recent/Average Ratings:</h3>
+    </div>
+</div>
