@@ -38,20 +38,6 @@ qecApp.directive('bgImage', function ($window) {
         });
     }
 });
-
-//qecApp.directive("teacherDetail", function(){
-//
-//    return{
-//        restrict: 'AECM',
-//        templateUrl: 'templates/teacherDetails.html',
-//        replace: true,
-//        scope: {
-//            teacherBio: '='
-//        }
-//    }
-//
-//});
-
 qecApp.directive('starRating', function() {
     return {
         restrict: 'EA',

@@ -8,22 +8,27 @@ qecApp.controller('forgotLoginController', ['$scope', '$routeParams', function (
 
 }]);
 
-qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherMaker', 'teacherParser', '$http', '$log', '$location', '$timeout', 'graphDetails',
-    function ($scope, $routeParams, teacherMaker, teacherParser, $http, $log, $location, $timeout, graphDetails) {
+qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherMaker', 'teacherParser', '$http', '$log', '$location', '$timeout', 'graphDetails', '$window',
+    function ($scope, $routeParams, teacherMaker, teacherParser, $http, $log, $location, $timeout, graphDetails, $window) {
 
         $scope.teachers = teacherMaker;
 
         $scope.value = teacherParser.value;
         $scope.graphValue = null;
 
+        $scope.logout = function () {
+            console.info('Logout function invoked');
+            $http.get('/logout');
+            $window.location.reload();
+        }
         $scope.logTeacher = function (event) {
 
             if (event.target.name) {
                 $scope.value = event.target.name;
                 $scope.$watch('value', function () {
                     teacherParser.value = event.target.name;
-
                     console.log('On dashboard' + teacherParser.value);
+
                 });
             }
 
@@ -35,163 +40,31 @@ qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherM
                 $log.info(' got back as result', graphDetails.graph);
 
                 $location.path('/graph/:' + $scope.value + '');
-                /*ruko aik min AAGYA
-                 graphDetails.graph*/
 
             }).error(function (data, status) {
                 $log.info('err at getting details: ', data);
             })
-
-
         }
-    }]);
-
-qecApp.controller('studentLoginController', ['$scope', '$routeParams', '$log', '$http', '$location', '$timeout',
-    function ($scope, $routeParams, $log, $http, $location, $timeout) {
-
-        $scope.accountid = '';
-        $scope.password = '';
-        $scope.msgclass = '';
-        $scope.msg = 'LOGIN';
-
-        $scope.printMessage = function (msg, msgclass) {
-            $scope.msg = msg;
-            $scope.msgclass = msgclass;
-
-            $timeout(function () {
-                $scope.msg = 'LOGIN';
-                $scope.msgclass = '';
-            }, 5000)
-        }
-
-        $scope.login = function () {
-            $log.info('Login invoked..');
-            $http.post('/api/login', {
-                accountid: $scope.accountid,
-                password: $scope.password
-            }).success(function (result) {
-                $location.path('/student-dashboard');
-            }).error(function (data, status) {
-                $scope.printMessage(data.msg, 'alert alert-danger text-center')
-            })
-        }
-    }]);
-
-qecApp.controller('questionnaireController', ['$scope', '$routeParams', 'questionMaker', 'starsParser', 'questionParser', 'teacherParser', '$log', '$http', '$timeout', '$location',
-
-    function ($scope, $routeParams, questionMaker, starsParser, questionParser, teacherParser, $log, $http, $timeout, $location) {
-
-        $scope.pageValue = 1;
-
-        $scope.teacher = teacherParser.value;
-
-        $scope.questions = questionMaker;
-
-        console.info(($scope.teacher).toLowerCase());
-
-        $scope.$watch('pageValue', function(){
-            $scope.teacherValue = $routeParams.value || $scope.pageValue;
-            teacherParser.page = $scope.teacherValue;
-            console.log('On questionnaire', teacherParser.page);
-        });
-
-        /*$scope.$watch('pageValue', function () {
-
-         questionParser.page = $scope.pageValue;
-         console.log('New Page Value : ' , questionParser.page + ", " + $scope.pageValue);
-
-
-         $scope.stars = starsParser.newStars;
-         $scope.$watch('stars', function(){
-         $scope.stars = starsParser.newStars;
-         console.log('Stars on question controller: ' + starsParser.newStars);
-
-         ($scope.starsArray).splice($scope.pageValue - 2, 1, starsParser.newStars);
-         console.log('Array: ' + $scope.starsArray);
-         });
-         });*/
-
-        $scope.stars = starsParser.newStars[0];
-        $scope.$watch('stars', function() {
-            $scope.stars = starsParser.newStars[0];
-            console.log('Stars on question controller: ' + starsParser.newStars[0]);
-        });
-            $scope.printMessage = function (errclass, errmsg) {
-            $scope.errclass = errclass;
-            $scope.errmsg = errmsg;
-        };
-        $scope.month = new Array();
-        $scope.month[0] = "January";
-        $scope.month[1] = "February";
-        $scope.month[2] = "March";
-        $scope.month[3] = "April";
-        $scope.month[4] = "May";
-        $scope.month[5] = "June";
-        $scope.month[6] = "July";
-        $scope.month[7] = "August";
-        $scope.month[8] = "September";
-        $scope.month[9] = "October";
-        $scope.month[10] = "November";
-        $scope.month[11] = "December";
-
-
-        var value = 2.365;
-
-        $log.info('rounded/ ', value.toFixed(1));
-        $scope.updateDetails = function () {
-            $scope.printMessage('alert alert-warning text-center', 'Please Wait! Result Being Uploaded.');
-            $scope.name = $scope.teacher;
-            $scope.survey = {
-                date: new Date().getDate() + ', ' + $scope.month[new Date().getMonth()],
-                data: $scope.starsArray
-            };
-
-            var total = 0;
-            for (i = 0; i < $scope.survey.data.length; i++)
-                total += $scope.survey.data[i];
-            console.log('name: ', $scope.name);
-            console.log('Data - Average: ', total / $scope.survey.data.length);
-            console.log('Date: ', $scope.survey.date);
-            console.log('Date - Survey: ', $scope.survey.date);
-            $http.post('/api/submit_quiz', {
-                name: $scope.name,
-                survey: $scope.survey
-            }).success(function (result) {
-                $log.info('Update Success - CLIENT ');
-                $scope.printMessage('alert alert-success text-center', result.msg);
-                $location.path('/student-login');
-                $timeout(function () {
-                    $scope.printMessage('', '')
-                }, 10000);
-            }).error(function (data, status) {
-                $log.error('RESPONSE ERR - CLIENT ', data);
-                console.log(data);
-                $scope.printMessage('alert alert-danger text-center', data.msg);
-                $timeout(function () {
-                    $scope.printMessage(undefined, undefined)
-                }, 10000);
-            });
-        };
-
+        $scope.error = 404;
+        $scope.msg = "404. Not Foound";
 
     }]);
-
 qecApp.controller('sliderController', ['$scope', '$timeout', 'QueueService', function ($scope, $timeout, QueueService) {
 
 
     var INTERVAL = 5000,
         slides = [
-            {id: "image00", src: "imgs/Slider/DUETFromMM.jpg"},
+            { id: "image00", src: "imgs/Slider/DUETFromMM.jpg" },
             //{id: "image00", src: "imgs/Slider/DUETFromMM.jpg"},
-            {id: "image02", src: "imgs/Slider/FlagMarch.jpg"},
+            { id: "image02", src: "imgs/Slider/FlagMarch.jpg" },
             //{id: "image02", src: "imgs/Slider/FlagMarch.jpg"},
-            {id: "image03", src: "imgs/Slider/Audi.jpg"},
+            { id: "image03", src: "imgs/Slider/Audi.jpg" },
             //{id: "image03", src: "imgs/Slider/Audi.jpg"},
-            {id: "image03", src: "imgs/Slider/DUET.jpg"},
+            { id: "image03", src: "imgs/Slider/DUET.jpg" },
             //{id: "image03", src: "imgs/Slider/DUET.jpg"},
-            {id: "image03", src: "imgs/Slider/DUET2.jpg"},
+            { id: "image03", src: "imgs/Slider/DUET2.jpg" },
             //{id: "image03", src: "imgs/Slider/DUET2.jpg"},
-            {id: "image03", src: "imgs/Slider/DUET3.jpg"},
+            { id: "image03", src: "imgs/Slider/DUET3.jpg" },
             //{id: "image03", src: "imgs/Slider/DUET3.jpg"}
 
         ];
@@ -281,9 +154,9 @@ qecApp.controller('hodLoginController', ['$scope', '$log', '$http', '$location',
                 email: $scope.hodEmail,
                 password: $scope.hodPassword
             }).success(function (result) {
-                    $log.info (result + ' successfully logged in');
-                    $location.path('/dashboard')
-                })
+                $log.info(result + ' successfully logged in');
+                $location.path('/dashboard')
+            })
                 .error(function (data, status) {
                     $log.error('err: ', data.msg);
                     $scope.printMessage(data.msg, 'alert alert-danger text-center no-gutter');
@@ -293,17 +166,16 @@ qecApp.controller('hodLoginController', ['$scope', '$log', '$http', '$location',
 
 qecApp.controller('ratingController', ['$scope', 'starsParser', 'questionParser', function ($scope, starsParser, questionParser) {
 
-    $scope.ratingValue = 3;
+    $scope.ratingValue = 1;
 
     $scope.starsArray = [];
 
-    $scope.$watch('ratingValue', function(newValue, oldValue){
+    $scope.$watch('ratingValue', function (newValue, oldValue) {
         starsParser.newStars = $scope.ratingValue;
-        //$scope.starsArray = ($scope.ratingValue);
-
+        console.log('Stars on rating controller', $scope.ratingValue);
     });
 
-    $scope.text = ['Never', 'Sometimes', 'Usually', 'Most of time', 'Always' ];
+    $scope.text = ['Never', 'Sometimes', 'Usually', 'Most of time', 'Always'];
 
 }]);
 
@@ -320,7 +192,6 @@ qecApp.controller('graphController', ['$scope', '$routeParams', 'teacherParser',
      $scope.value = teacherParser.valuee;
      //(JSON.stringify($scope.value));
      $scope.value = angular.fromJson($scope.value);
-
      });*/
     console.info(($scope.teacher.value).toLowerCase());
 
@@ -373,261 +244,20 @@ qecApp.controller('studentRegistrationController', ['$scope', '$log', '$location
         }
     }]);
 
-
-qecApp.controller('studentDashboardController', ['$scope', '$routeParams', 'teacherParser', 'teacherMaker', function ($scope, $routeParams, teacherParser, teacherMaker) {
-
-    $scope.teacherValue = $routeParams.value || 1;
-
-    $scope.teachers = teacherMaker;
-
-    $scope.value = teacherParser.value;
-
-    $scope.logTeacher = function (event) {
-        if (event.target.name) {
-            $scope.value = event.target.name;
-            $scope.$watch('value', function () {
-                teacherParser.value = event.target.name;
-                console.log('On dashboard' + teacherParser.value);
-            });
-        }
-    };
-
-
-    $scope.pageValue = '1';
-    $scope.changePage = function (event) {
-
-        if (event.target.id) {
-            $scope.pageValue = event.target.id;
-        }
-
-        //$scope.pageValue = event.target.id;
-        console.info($scope.pageValue);
-    }
-
-
-    $scope.teacherImages = {
-
-        firstColumn: {
-            image1: {url: 'imgs/Slider/slider/slider5.jpg', value: '1'},
-            image2: {url: 'imgs/Slider/slider/slider2.png', value: '2'},
-            image3: {url: 'imgs/Slider/slider/slider3.png', value: '3'},
-            image4: {url: 'imgs/Slider/slider/slider4.png', value: '4'},
-            image5: {url: 'imgs/Slider/slider/slider5.jpg', value: '4'},
-            image6: {url: 'imgs/Slider/slider/slider6.png', value: '4'}
-        },
-        secondColumn: {
-            image5: {url: 'imgs/Slider/slider/slider7.png', value: '5'},
-            image6: {url: 'imgs/Slider/slider/slider6.png', value: '6'},
-            image7: {url: 'imgs/Slider/slider/slider5.jpg', value: '7'},
-            image8: {url: 'imgs/Slider/slider/slider1.jpg', value: '8'},
-            image4: {url: 'imgs/Slider/slider/slider3.png', value: '4'},
-            image9: {url: 'imgs/Slider/slider/slider2.png', value: '4'}
-        },
-        /*  thirdColumn: {
-         image9  : {url: 'imgs/Slider/slider/slider1.jpg',  value: '9'},
-         image10 : {url: 'imgs/Slider/slider/slider2.png', value: '11'},
-         image11 : {url: 'imgs/Slider/slider/slider3.png', value: '10'},
-         image12 : {url: 'imgs/Slider/slider/slider4.png', value: '12'},
-         image4 : {url: 'imgs/Slider/slider/slider5.jpg', value:'4'},
-         image6 : {url: 'imgs/Slider/slider/slider6.png', value:'4'}
-         },*/
-    };
-
-
-    /*
-
-     $scope.teachers = {
-     teacher1: {
-     name: 'teacher1',
-     age: 00,
-     gender: 'unknown',
-     subjects: [
-     'First subject', 'Second Subject'
-     ],
-     projects: [
-     'First Project', 'Second Project'
-     ],
-     Ratings: 0,
-     image: 'imgs/Slider/1.jpg',
-     },
-     teacher2: {
-     name: 'teacher2',
-     age: 00,
-     gender: 'unknown',
-     subjects: [
-     'First subject', 'Second Subject'
-     ],
-     projects: [
-     'First Project', 'Second Project'
-     ],
-     Ratings: 0,
-     image: 'imgs/Slider/2.jpg'
-     },
-     teacher3: {
-     name: 'teacher3',
-     age: 00,
-     gender: 'unknown',
-     subjects: [
-     'First subject', 'Second Subject'
-     ],
-     projects: [
-     'First Project', 'Second Project'
-     ],
-     Ratings: 0,
-     image: 'imgs/Slider/3.jpg'
-     },
-
-     teacher4: {
-     name: 'teacher4',
-     age: 00,
-     gender: 'unknown',
-     subjects: [
-     'First subject', 'Second Subject'
-     ],
-     projects: [
-     'First Project', 'Second Project'
-     ],
-     Ratings: 0,
-     image: 'imgs/Slider/4.jpg'
-     },
-
-     teacher5: {
-     name: 'teacher5',
-     age: 00,
-     gender: 'unknown',
-     subjects: [
-     'First subject', 'Second Subject'
-     ],
-     projects: [
-     'First Project', 'Second Project'
-     ],
-     Ratings: 0,
-     image: 'imgs/Slider/5.jpg'
-     },
-
-     teacher6: {
-     name: 'teacher6',
-     age: 00,
-     gender: 'unknown',
-     subjects: [
-     'First subject', 'Second Subject'
-     ],
-     projects: [
-     'First Project', 'Second Project'
-     ],
-     Ratings: 0,
-     image: 'imgs/Slider/6.jpg'
-     },
-
-     teacher7: {
-     name: 'teacher7',
-     age: 00,
-     gender: 'unknown',
-     subjects: [
-     'First subject', 'Second Subject'
-     ],
-     projects: [
-     'First Project', 'Second Project'
-     ],
-     Ratings: 0,
-     image: 'imgs/Slider/7.jpg'
-     },
-
-     teacher8: {
-     name: 'teacher8',
-     age: 00,
-     gender: 'unknown',
-     subjects: [
-     'First subject', 'Second Subject'
-     ],
-     projects: [
-     'First Project', 'Second Project'
-     ],
-     Ratings: 0,
-     image: 'imgs/Slider/8.jpg'
-     },
-
-     teacher9: {
-     name: 'teacher9',
-     age: 00,
-     gender: 'unknown',
-     subjects: [
-     'First subject', 'Second Subject'
-     ],
-     projects: [
-     'First Project', 'Second Project'
-     ],
-     Ratings: 0,
-     image: 'imgs/Slider/9.jpg'
-     },
-
-     teacher10: {
-     name: 'teacher10',
-     age: 00,
-     gender: 'unknown',
-     subjects: [
-     'First subject', 'Second Subject'
-     ],
-     projects: [
-     'First Project', 'Second Project'
-     ],
-     Ratings: 0,
-     image: 'imgs/Slider/10.jpg'
-     },
-
-     teacher11: {
-     name: 'teacher11',
-     age: 00,
-     gender: 'unknown',
-     subjects: [
-     'First subject', 'Second Subject'
-     ],
-     projects: [
-     'First Project', 'Second Project'
-     ],
-     Ratings: 0,
-     image: 'imgs/Slider/11.jpg'
-     },
-
-     teacher12: {
-     name: 'teacher12',
-     age: 00,
-     gender: 'unknown',
-     subjects: [
-     'First subject', 'Second Subject'
-     ],
-     projects: [
-     'First Project', 'Second Project'
-     ],
-     Ratings: 0,
-     image: 'imgs/Slider/12.jpg'
-     }
-     }
-     */
-
-
-}]);
-
-qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location', '$http', '$timeout',
-    function ($scope, $log, $location, $http, $timeout) {
-        $scope.teacherName = '';
-        $scope.teacherEmail = '';
-        $scope.teacherContact = '';
-        $scope.teacherDepartment = '';
-        $scope.msgclass = '';
-        $scope.msg = 'TEACHER REGISTRATION';
-
-
+qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location', '$http', '$timeout', 'Upload',
+    function ($scope, $log, $location, $http, $timeout, Upload) {
+        
         $scope.printMessage = function (msg, msgclass) {
             $scope.msg = msg;
             $scope.msgclass = msgclass;
 
             $timeout(function () {
-                $scope.msg = 'TEACHER REGISTRATION';
+                $scope.msg = '';
                 $scope.msgclass = '';
             }, 5000)
         }
         $scope.register = function () {
+            $scope.printMessage('Please Wait', 'alert-info text-center');
             $log.log('info', $scope.teacherName,
                 $scope.teacherEmail,
                 $scope.teacherContact,
@@ -644,12 +274,11 @@ qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location
                 contact: $scope.teacherContact
             }).success(function (result) {
                 $log.info('SAVE SUCCESS 200/OK', result);
-                $scope.printMessage(result, 'alert alert-success text-center');
+                $scope.printMessage(result, 'alert-success text-center');
             }).error(function (err) {
                 $log.error('ERROR AT SAVING TEACHER DATA', err);
-                $scope.printMessage(err, 'alert alert-danger text-center');
+                $scope.printMessage(err, 'alert-danger text-center');
 
             })
         }
     }]);
-

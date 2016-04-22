@@ -9,7 +9,7 @@
             <form novalidate id="teacherRegistration" name="teacherRegistration" role="form">
 
                 <img src="imgs/duet-up.png" class="img-responsive">
-                <h3 class = {{msgclass}}>{{msg}}</h3>
+                <h3>Teacher Registration</h3>
                 <div class="form-group has-feedback has-feedback-left"
                      ng-class="{ 'has-error' :teacherRegistration.teacherRegistrationName.$touched && teacherRegistration.teacherRegistrationName.$invalid,
                                     'has-success': teacherRegistration.teacherRegistrationName.$valid
@@ -19,7 +19,7 @@
                            class="form-control"
                            id="teacherRegistrationName"
                            name="teacherRegistrationName"
-                           ng-model="teacherName"
+                           ng-model="teacher.name"
                            placeholder="Teacher Name"
                            required
                     >
@@ -34,7 +34,7 @@
                            class="form-control"
                            id="teacherRegistrationEmail"
                            name="teacherRegistrationEmail"
-                           ng-model="teacherEmail"
+                           ng-model="teacher.email"
                            placeholder="Email"
                            required
                     >
@@ -49,7 +49,7 @@
                            class="form-control"
                            id="teacherRegistrationContact"
                            name="teacherRegistrationContact"
-                           ng-model="teacherContact"
+                           ng-model="teacher.contact"
                            placeholder="Contact No."
                            ng-pattern="/^[0-9]{4}-[0-9]{7}$/"
                            required
@@ -65,16 +65,20 @@
                            class="form-control"
                            id="teacherRegistrationDepartment"
                            name="teacherRegistrationDepartment"
-                           ng-model="teacherDepartment"
+                           ng-model="teacher.dept"
                            placeholder="Department"
                            required
-                    >
+                    />
                     <i class="glyphicon glyphicon-education form-control-feedback"></i>
+                    
+                    <input style="margin: 15px 0" type="file" class="form-control pull-right"  placeholder="Teacher's Photo'"/>
                 </div>
                 <!--<p class="{{errclass}}">{{errmsg}}</p>-->
+                <p style=" margin:10px 0; border-radius: 20px; font-weight: bold; opacity=0.75;" class = {{msgclass}}>{{msg}}</p>
                 <button class="btn btn-lg btn-block" href="#/" role="button"
                         ng-disabled="teacherRegistration.$invalid" ng-click="register()">SUBMIT</button>
                 <br>
+                <p>{{teacherEmail}}</p>
                 <img src="imgs/duet-down.png" class="img-responsive">
             </form>
         </div>
