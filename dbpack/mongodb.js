@@ -35,8 +35,7 @@ module.exports = function(Schema, q){
                     bcrypt.compare(dts.password, result.password, function(err, match){
                         if(err) throw err;
                         console.log('is matched: ', match);
-                        match ? promise.resolve({email: result.email,
-                            login: true, status:200})
+                        match ? promise.resolve(result)
                             : promise.reject({status: 401, msg: 'Email or Password not valid.'});
                     })
                 } else promise.reject({status:400, msg: 'No such account exists'})

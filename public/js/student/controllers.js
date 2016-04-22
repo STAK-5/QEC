@@ -1,5 +1,5 @@
 
-qecApp.controller('studentLoginController', ['$scope', '$routeParams', '$log', '$http', '$location', '$timeout','$window',
+qecAppStudent.controller('studentLoginController', ['$scope', '$routeParams', '$log', '$http', '$location', '$timeout','$window',
     function ($scope, $routeParams, $log, $http, $location, $timeout,$window) {
         
         console.info('This is student Login');
@@ -31,9 +31,11 @@ qecApp.controller('studentLoginController', ['$scope', '$routeParams', '$log', '
         }
     }]);
 
-qecApp.controller('studentDashboardController', ['$scope', '$routeParams', 'teacherParser', 'teacherMaker', function ($scope, $routeParams, teacherParser, teacherMaker) {
+qecAppStudent.controller('studentDashboardController', ['$scope', '$routeParams', 'teacherParser', 'teacherMaker', function ($scope, $routeParams, teacherParser, teacherMaker) {
 
     $scope.teacherValue = $routeParams.value || 1;
+    
+    console.info('Got Student');
 
     $scope.teachers = teacherMaker;
 
@@ -94,7 +96,7 @@ qecApp.controller('studentDashboardController', ['$scope', '$routeParams', 'teac
 }]);
 
 
-qecApp.controller('questionnaireController', ['$scope', '$routeParams', 'questionMaker', 'starsParser', 'questionParser', 'teacherParser', '$log', '$http', '$timeout', '$location',
+qecAppStudent.controller('questionnaireController', ['$scope', '$routeParams', 'questionMaker', 'starsParser', 'questionParser', 'teacherParser', '$log', '$http', '$timeout', '$location',
 
     function ($scope, $routeParams, questionMaker, starsParser, questionParser, teacherParser, $log, $http, $timeout, $location) {
 

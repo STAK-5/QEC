@@ -3,34 +3,19 @@
  */
 
 qecApp.config(['$routeProvider', '$locationProvider', function($routeProvider /*, $locationProvider*/) {
-
     $routeProvider
 
-        .when('/', {
-            templateUrl: 'pages/hodDashboard.html',
-            controller: 'hodDashboardController'
-        })
+         .when('/', {
+             templateUrl: 'pages/hodDashboard.html',
+             controller: 'hodDashboardController'
+         })
 
         .when('/forgot', {
             templateUrl: 'pages/forgot.html',
             controller: 'forgotLoginController'
         })
 
-        .when('/student-login', {
-            templateUrl: 'pages/studentLogin.html',
-            controller: 'studentLoginController'
-        })
-
-        .when('/questionnaire', {
-            templateUrl: 'pages/questionnaire.html',
-            controller: 'questionnaireController'
-        })
-
-        .when('/questionnaire/:value', {
-            templateUrl: 'pages/questionnaire.html',
-            controller: 'questionnaireController'
-        })
-
+        
         .when('/about', {
             templateUrl: 'pages/about.html',
             controller: 'sliderController'
@@ -46,17 +31,33 @@ qecApp.config(['$routeProvider', '$locationProvider', function($routeProvider /*
             controller: 'graphController'
         })
 
-        .when('/student-registration', {
+/*        .when('/student-registration', {
             templateUrl: 'pages/studentRegistration.html',
             controller: 'studentRegistrationController'
         })
+*/
+        //  .when('/std', {
+        //     templateUrl: 'pages/studentDashboard.html',
+        //     controller: 'studentDashboardController'
+        // })
+/*
+ 
+        // .when('/std', {
+        //     templateUrl: 'pages/studentLogin.html',
+        //     controller: 'studentLoginController'
+        // })
 
-        .when('/student-dashboard', {
-            templateUrl: 'pages/studentDashboard.html',
-            controller: 'studentDashboardController'
+        .when('/questionnaire', {
+            templateUrl: 'pages/questionnaire.html',
+            controller: 'questionnaireController'
         })
 
-        .when('/add-teacher',{
+        .when('/questionnaire/:value', {
+            templateUrl: 'pages/questionnaire.html',
+            controller: 'questionnaireController'
+        })
+*/
+       .when('/add-teacher',{
             templateUrl: 'pages/addTeacher.html',
             controller: 'teacherRegistrationController'
         })
