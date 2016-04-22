@@ -81,39 +81,42 @@ qecApp.controller('questionnaireController', ['$scope', '$routeParams', 'questio
 
     function ($scope, $routeParams, questionMaker, starsParser, questionParser, teacherParser, $log, $http, $timeout, $location) {
 
-        $scope.teacherValue = $routeParams.value || 1;
+        $scope.pageValue = 1;
 
         $scope.teacher = teacherParser.value;
 
         $scope.questions = questionMaker;
 
-        //$scope.teacher = teacherParser;
-
         console.info(($scope.teacher).toLowerCase());
 
-
-        $scope.pageValue = 1;
-
-        $scope.starsArray = [];
-        $scope.$watch('pageValue', function () {
-
-            questionParser.page = $scope.pageValue;
-            console.log('New Page Value : ' + questionParser.page);
-
-            $scope.stars = starsParser.newStars;
-
-            $scope.$watch('stars', function () {
-                $scope.stars = starsParser.newStars;
-                console.log('Stars on question controller: ' + starsParser.newStars);
-
-                ($scope.starsArray).splice($scope.pageValue - 2, 1, starsParser.newStars);
-                console.log('Array: ' + $scope.starsArray);
-
-            });
+        $scope.$watch('pageValue', function(){
+            $scope.teacherValue = $routeParams.value || $scope.pageValue;
+            teacherParser.page = $scope.teacherValue;
+            console.log('On questionnaire', teacherParser.page);
         });
 
+        /*$scope.$watch('pageValue', function () {
 
-        $scope.printMessage = function (errclass, errmsg) {
+         questionParser.page = $scope.pageValue;
+         console.log('New Page Value : ' , questionParser.page + ", " + $scope.pageValue);
+
+
+         $scope.stars = starsParser.newStars;
+         $scope.$watch('stars', function(){
+         $scope.stars = starsParser.newStars;
+         console.log('Stars on question controller: ' + starsParser.newStars);
+
+         ($scope.starsArray).splice($scope.pageValue - 2, 1, starsParser.newStars);
+         console.log('Array: ' + $scope.starsArray);
+         });
+         });*/
+
+        $scope.stars = starsParser.newStars[0];
+        $scope.$watch('stars', function() {
+            $scope.stars = starsParser.newStars[0];
+            console.log('Stars on question controller: ' + starsParser.newStars[0]);
+        });
+            $scope.printMessage = function (errclass, errmsg) {
             $scope.errclass = errclass;
             $scope.errmsg = errmsg;
         };
@@ -290,13 +293,14 @@ qecApp.controller('hodLoginController', ['$scope', '$log', '$http', '$location',
 
 qecApp.controller('ratingController', ['$scope', 'starsParser', 'questionParser', function ($scope, starsParser, questionParser) {
 
-    $scope.ratingValue = 1;
+    $scope.ratingValue = 3;
 
     $scope.starsArray = [];
 
-    $scope.$watch('ratingValue', function (newValue, oldValue) {
+    $scope.$watch('ratingValue', function(newValue, oldValue){
         starsParser.newStars = $scope.ratingValue;
-        console.log('Stars on rating controller', $scope.ratingValue);
+        //$scope.starsArray = ($scope.ratingValue);
+
     });
 
     $scope.text = ['Never', 'Sometimes', 'Usually', 'Most of time', 'Always' ];

@@ -16,7 +16,7 @@ qecApp.service('starsParser', function(){
 
 qecApp.service('questionParser', function () {
 
-    this.page;
+    this.page = 1;
 });
 
 qecApp.service('graphDetails', function () {
