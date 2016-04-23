@@ -1,4 +1,4 @@
-qecApp.controller('sliderController', ['$scope', '$timeout', 'QueueService', function ($scope, $timeout, QueueService) {
+qecAppStudent.controller('sliderController', ['$scope', '$timeout', 'QueueService', function ($scope, $timeout, QueueService) {
 
 
     var INTERVAL = 5000,
