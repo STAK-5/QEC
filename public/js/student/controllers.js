@@ -1,7 +1,7 @@
 qecAppStudent.controller('sliderController', ['$scope', '$timeout', 'QueueService', function ($scope, $timeout, QueueService) {
 
 
-    var INTERVAL = 5000,
+    var INTERVAL = 15000,
         slides = [
             { id: "image00", src: "imgs/Slider/DUETFromMM.jpg" },
             //{id: "image00", src: "imgs/Slider/DUETFromMM.jpg"},
@@ -118,14 +118,14 @@ qecAppStudent.controller('studentDashboardController', ['$scope', '$routeParams'
             $scope.value = event.target.name;
             $scope.$watch('value', function () {
                 teacherParser.value = event.target.name;
-                console.log('On dashboard' + teacherParser.value);
+                console.log('On dashboard: ' + teacherParser.value);
             });
         }
     };
 
 
     $scope.pageValue = '1';
-    $scope.changePage = function (event) {
+    /*$scope.changePage = function (event) {
 
         if (event.target.id) {
             $scope.pageValue = event.target.id;
@@ -133,7 +133,7 @@ qecAppStudent.controller('studentDashboardController', ['$scope', '$routeParams'
 
         //$scope.pageValue = event.target.id;
         console.info($scope.pageValue);
-    }
+    }*/
 
 
     $scope.teacherImages = {
@@ -168,6 +168,22 @@ qecAppStudent.controller('studentDashboardController', ['$scope', '$routeParams'
 }]);
 
 
+qecAppStudent.controller('ratingController', ['$scope', 'starsParser', 'questionParser', function ($scope, starsParser, questionParser) {
+
+    $scope.ratingValue = 1;
+
+    $scope.starsArray = [];
+
+    $scope.$watch('ratingValue', function (newValue, oldValue) {
+        starsParser.newStars = $scope.ratingValue;
+        console.log('Stars on rating controller', $scope.ratingValue);
+    });
+
+    $scope.text = ['Never', 'Sometimes', 'Usually', 'Most of time', 'Always'];
+
+}]);
+
+
 qecAppStudent.controller('questionnaireController', ['$scope', '$routeParams', 'questionMaker', 'starsParser', 'questionParser', 'teacherParser', '$log', '$http', '$timeout', '$location',
 
     function ($scope, $routeParams, questionMaker, starsParser, questionParser, teacherParser, $log, $http, $timeout, $location) {
@@ -186,21 +202,37 @@ qecAppStudent.controller('questionnaireController', ['$scope', '$routeParams', '
         $scope.pageValue = 1;
 
         $scope.starsArray = [];
-        $scope.$watch('pageValue', function () {
+        $scope.$watch('pageValue', function (newValue, oldValue) {
 
             questionParser.page = $scope.pageValue;
             console.log('New Page Value : ' + questionParser.page);
 
             $scope.stars = starsParser.newStars;
 
-            $scope.$watch('stars', function () {
-                $scope.stars = starsParser.newStars;
-                console.log('Stars on question controller: ' + starsParser.newStars);
+            if(newValue >= oldValue){
+                console.info('Next button pressed.');
+                console.info('newValue: ', newValue);
+                $scope.$watch('stars', function () {
+                    $scope.stars = starsParser.newStars;
+                    console.log('Stars on question controller: ' + starsParser.newStars);
+                    ($scope.starsArray).splice($scope.pageValue - 2, 1, starsParser.newStars);
+                    console.log('Array: ' + $scope.starsArray);
 
-                ($scope.starsArray).splice($scope.pageValue - 2, 1, starsParser.newStars);
-                console.log('Array: ' + $scope.starsArray);
+                });
+            }
+            if(newValue <= oldValue){
+                console.info('Back button pressed.');
+                console.info('newValue: ', newValue);
+                $scope.$watch('stars', function () {
+                    $scope.stars = starsParser.newStars;
+                    console.log('Stars on question controller: ' + starsParser.newStars);
+                    ($scope.starsArray).splice($scope.pageValue - 1, 1, starsParser.newStars);
+                    console.log('Array: ' + $scope.starsArray);
 
-            });
+                });
+            }
+
+
         });
 
 

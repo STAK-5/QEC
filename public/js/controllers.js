@@ -166,7 +166,7 @@ qecApp.controller('hodLoginController', ['$scope', '$log', '$http', '$location',
     }]);
 
 qecApp.controller('ratingController', ['$scope', 'starsParser', 'questionParser', function ($scope, starsParser, questionParser) {
-
+f
     $scope.ratingValue = 1;
 
     $scope.starsArray = [];

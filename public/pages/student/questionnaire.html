@@ -48,7 +48,7 @@
         </div>
         <div class="col-md-9" ng-hide=" pageValue > 18 ">
             <div id="section">
-                 <div class="repeat-animation" ng-show="teacherValue == question.QuestionNum" ng-repeat="question in questions">
+                 <div class="repeat-animation" ng-show="pageValue == question.QuestionNum" ng-repeat="question in questions">
                 <h1>{{ question.Name }}</h1>
                 <p>{{ question.Q }}</p>
 
