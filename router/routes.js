@@ -12,9 +12,9 @@ module.exports = function (app, express, mongoose) {
     router.get('/', function (req, res, next) {
         console.log('[SESSIONS] value: ', req.session.login);
         if (req.session.login !== undefined)
-            res.render('index.html');
+            res.render('index');
         else
-            res.render('login_hod.html', { title: title });
+            res.render('login_hod', { title: title });
     });
 
     app.get(function (req, res) {

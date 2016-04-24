@@ -9,7 +9,6 @@ var express = require('express'),
     ConnectMongo = require('connect-mongo')(session),
     bodyparser = require('body-parser'),
     expressvalidator = require('express-validator'),
-    Promise = require('promise'),
     mongoose = require('mongoose').connect(config.dbURL);
 
 
