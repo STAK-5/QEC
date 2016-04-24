@@ -33,7 +33,17 @@
                     <div class="row w3-container" ng-repeat="rows in teachers" ng-cloak>
                         <div ng-repeat="teacher in rows" class="col-lg-2 col-md-6 col-sm-4 col-xs-6 portfolio-item" ng-cloak>
                                 <div class="w3-card-24 w3-blue-grey line-height">
-                                        <img id="{{ teacher.name }}" name="{{ teacher.name }}" class="line-height col-lg-12 col-xs-12 animated flipInY img-responsive" ng-src="./imgs/uploaded/{{ teacher.ph_curname }}" alt="{{ teacher.name }}'s Image" style="height: 150px">
+                                        <div class="effects">
+                                            <div class="demo">
+                                                <figure class="imghvr-blur">
+                                                    <img id="{{ teacher.name }}" name="{{ teacher.name }}" class="line-height col-lg-12 col-xs-12 animated flipInY img-responsive" ng-src="./imgs/uploaded/{{ teacher.ph_curname }}" alt="{{ teacher.name }}'s Image" style="height: 150px">
+                                                    <figcaption>
+                                                        <p>{{ teacher.name }}</p>
+                                                        <p>{{ teacher.current_average }}</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                        </div>
                                         <button ng-click="logTeacher($event)" class="w3-btn-block w3-hover-border-dark-grey w3-hover-blue-grey" name="{{ teacher.name }}">{{teacher.name}}</button>
                                 </div>
                         </div>

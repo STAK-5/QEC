@@ -437,3 +437,37 @@ form .progress {
     font-size: smaller;
     background: orange;
 }
+
+/*-----------------------------------------------------*/
+
+
+.demo {
+    display: inline-block;
+    width: 24%;
+    padding: 10px;
+    -webkit-box-sizing: padding-box;
+    box-sizing: padding-box;
+}
+.demo textarea {
+    -webkit-box-sizing: padding-box;
+    box-sizing: padding-box;
+    font-family: "Roboto";
+    font-size: 0.9em;
+    height: 32px;
+    padding: 6px 0px;
+    resize: none;
+    text-align: center;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.imghvr-blur .figcaption {
+    opacity: 0;
+}
+.imghvr-blur:hover img{
+    filter:blur(30px);
+    transform:scale(1.2);
+    opacity: 0;}
+.imghvr-blur:hover img .figcaption{
+    opacity: 1;
+    transition-delay:0.6s;
+}
