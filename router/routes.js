@@ -8,11 +8,18 @@ module.exports = function (app, express, mongoose) {
     var attempts = 0;
     var requestIp = require('request-ip');
     var sess;
-
+    var title = 'HOD Login';
     router.get('/', function (req, res, next) {
-        res.render('index.html');
+        console.log('[SESSIONS] value: ', req.session.login);
+        if (req.session.login !== undefined)
+            res.render('index.html');
+        else
+            res.render('login_hod.html', { title: title });
     });
 
+    app.get(function (req, res) {
+        res.send('Not found');
+    })
     router.post('/api/hodlogin', function (req, res, next) {
         console.log('sessions : ', req.session.login);
         mongodb = require('./../dbpack/mongodb.js')(hodSchema, q);
@@ -25,12 +32,11 @@ module.exports = function (app, express, mongoose) {
             password: req.body.password
         }).then(function (respond) {
             req.session.login = respond.email;
-            res.status(200).send({sessiontype: 'hod', sessionkey: respond.email});
+            res.status(200).send({ sessiontype: 'hod', sessionkey: respond.email });
 
         }, function (err) {
-            //attempts++;
-            //console.log('server side attempts: ',attempts);
-                res.status(err.status).send({status: err.status, att: attempts, msg: err.err});
+            res.status(err.status).send({ status: err.status, att: attempts, msg: err.err });
+            router.redirect('/');
         });
     });
     router.post('/api/login', function (req, res, next) {
@@ -40,11 +46,9 @@ module.exports = function (app, express, mongoose) {
             .then(function (std) {
                 console.log('got back: ', std);
                 res.status(200).send(std);
-            }, function(err){
+            }, function (err) {
                 res.status(err.status).send(err);
             });
-
-
     });
 
 
@@ -100,13 +104,13 @@ module.exports = function (app, express, mongoose) {
         //else {
 
         console.log('request body ', req.body);
-            mongodb.saveTeacherData(req.body)
-                .then(function (result) {
-                    console.log('Teacher Saved', result);
-                    res.status(result.status).send(result.msg);
-                }, function (error) {
-                    res.status(error.status).send(error.msg);
-                });
+        mongodb.saveTeacherData(req.body)
+            .then(function (result) {
+                console.log('Teacher Saved', result);
+                res.status(result.status).send(result.msg);
+            }, function (error) {
+                res.status(error.status).send(error.msg);
+            });
         //}
 
     });
@@ -116,7 +120,7 @@ module.exports = function (app, express, mongoose) {
         /*YEH RAHA CATCHER - YAHAN req.body MAIN DATA AYAok...*/
         console.log(req.body.name, req.body.survey);
         mongodb = require('./../dbpack/mongodb.js')(TeacherSchema, q);
-        mongodb.getTeacherDetails({name: req.body.name})
+        mongodb.getTeacherDetails({ name: req.body.name })
             .then(function (result) {
 
                 var value = 0;
@@ -125,21 +129,21 @@ module.exports = function (app, express, mongoose) {
                 var survey_copy = result;
 
                 /* ALGORITHM FOR UPDATING DATA (IF EXISTS) AND INSERTING INTO DATABASE. */
-                for(var i=0; i< survey_copy.survey_records.length; i++){
+                for (var i = 0; i < survey_copy.survey_records.length; i++) {
 
-                    if(req.body.survey.date == survey_copy.survey_records[i].date){
+                    if (req.body.survey.date == survey_copy.survey_records[i].date) {
                         matchFound = true; /*SIMILAR DATES ARE FOUND*/
 
-                        if(survey_copy.survey_records[i].data.length > 0){
-                            for(j=0; j <survey_copy.survey_records[i].data.length; j++){
+                        if (survey_copy.survey_records[i].data.length > 0) {
+                            for (j = 0; j < survey_copy.survey_records[i].data.length; j++) {
                                 value = Number(req.body.survey.data[j]) + Number(survey_copy.survey_records[i].data[j]);
-                                value = value/2;
+                                value = value / 2;
                                 value = value.toFixed(1);
                                 newArray[j] = value;
                                 console.log('value added in newArray', newArray[j]);
                             }
                             survey_copy.survey_records[i].data = newArray;
-                            console.log('new array : ',newArray)
+                            console.log('new array : ', newArray)
                         } else {
                             survey_copy.survey_records[i].data = req.body.survey.data;
                             console.log('stored: ', survey_copy.survey_records[i].data);
@@ -148,7 +152,7 @@ module.exports = function (app, express, mongoose) {
                     }
                 }
 
-                if(!matchFound){
+                if (!matchFound) {
                     survey_copy.survey_records.push(req.body.survey)
                 }
                 /* END FOR -X- [ALGORITHM FOR UPDATING DATA (IF EXISTS) AND INSERTING INTO DATABASE.] */
@@ -156,13 +160,13 @@ module.exports = function (app, express, mongoose) {
 
 
                 /*      FINDING TOTAL AVERAGES      */
-                var totAvgs = [], total= 0, leng = 0;
-                for(i =0; i<survey_copy.survey_records.length;i++){
-                    for(j=0; j<survey_copy.survey_records[i].data.length; j++){
+                var totAvgs = [], total = 0, leng = 0;
+                for (i = 0; i < survey_copy.survey_records.length; i++) {
+                    for (j = 0; j < survey_copy.survey_records[i].data.length; j++) {
                         total += Number(survey_copy.survey_records[i].data[j]);
                         leng = survey_copy.survey_records[i].data.length;
                     }
-                    totAvgs[i] = (total/leng);
+                    totAvgs[i] = (total / leng);
                     totAvgs[i] = Number(totAvgs[i].toFixed(1));
                     total = 0; leng = 0;
                 }
@@ -171,8 +175,8 @@ module.exports = function (app, express, mongoose) {
 
                 /* FINDING CURRENT AVERAGES: */
                 var avg = 0; total = 0;
-                for(i=0; i< totAvgs.length; i++){
-                    total+= totAvgs[i];
+                for (i = 0; i < totAvgs.length; i++) {
+                    total += totAvgs[i];
                 }
                 avg = total / totAvgs.length;
                 avg = avg.toFixed(1);
@@ -181,9 +185,9 @@ module.exports = function (app, express, mongoose) {
 
                 /*      FINDING MAX AVERAGE     */
                 var max = 0;
-                for(i=0; i<totAvgs.length; i++){
-                    console.log('totAvgs['+i+']', totAvgs[i]);
-                    if(totAvgs[i] > max) max = totAvgs[i];
+                for (i = 0; i < totAvgs.length; i++) {
+                    console.log('totAvgs[' + i + ']', totAvgs[i]);
+                    if (totAvgs[i] > max) max = totAvgs[i];
                 }
                 survey_copy.max_average = max;
 
@@ -192,19 +196,19 @@ module.exports = function (app, express, mongoose) {
                     name: survey_copy.name,
                     survey: survey_copy
                 })
-                    .then(function(result){
+                    .then(function (result) {
                         console.log('updated: ', result);
-                        res.status(result.status).send({msg: result.msg});
-                    }, function(err){
+                        res.status(result.status).send({ msg: result.msg });
+                    }, function (err) {
                         console.log('err at updating: ', err.msg);
-                        res.status(res.status).send({msg: err.msg});
+                        res.status(res.status).send({ msg: err.msg });
                     })
 
             }, function (err) {
                 if (err.status == 404)
-                    res.status(404).send({msg: err.msg});
+                    res.status(404).send({ msg: err.msg });
                 else if (err.status == 500)
-                    res.status(500).send({msg: err.msg});
+                    res.status(500).send({ msg: err.msg });
             });
     });
 
@@ -218,30 +222,30 @@ module.exports = function (app, express, mongoose) {
         req.checkBody('cellphone', 'password does not match').notEmpty();
 
         var formValidationErrors = req.validationErrors();
-        if (formValidationErrors) res.status(502).send({errmsg: 'Field Provided Not Valid'});
+        if (formValidationErrors) res.status(502).send({ errmsg: 'Field Provided Not Valid' });
         else {
             mongodb = require('./../dbpack/mongodb.js')(hodSchema, q);
             mongodb.registerhod(req.body)
                 .then(function (success) {
                     res.status(200).send(success.msg);
                 }, function (error) {
-                    res.status(406).send({errmsg: error.msg});
+                    res.status(406).send({ errmsg: error.msg });
                     console.log('Error at registering HOD');
                 })
         }
     });
     //[ {s}, {s}, {s} , {s}, {s}, {s}]
 
-    router.post('/api/getdetails', function(req, res){
+    router.post('/api/getdetails', function (req, res) {
         mongodb = require('./../dbpack/mongodb.js')(TeacherSchema, q);
 
         mongodb.getTeacherDetails(req.body)
-            .then(function(result){
+            .then(function (result) {
                 var recentsurveys = [];
                 var avgs = [];
-                if(result.survey_records.length > 5){
+                if (result.survey_records.length > 5) {
                     console.log(' survey lengths are greater than 5');
-                    for(i=result.survey_records.length-5; i<result.survey_records.length; i++){
+                    for (i = result.survey_records.length - 5; i < result.survey_records.length; i++) {
                         recentsurveys.push(result.survey_records[i]);
                         avgs.push(result.total_averages[i]);
                     }
@@ -251,10 +255,25 @@ module.exports = function (app, express, mongoose) {
 
                 res.status(200).send(result);
                 console.log('[GET] teacher_details STATUS: ', 200);
-            }, function(err){
+            }, function (err) {
                 res.status(err.status).send(err);
             });
 
+    });
+
+
+    app.get('/logout', function (req, res) {
+        req.session.destroy(function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.redirect('/');
+            }
+        });
+
+    });
+    app.listen(3000, function () {
+        console.log("App Started on PORT 3000");
     });
     app.use('/', router);
 };

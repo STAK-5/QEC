@@ -7,18 +7,13 @@ qecApp.config(['$routeProvider', '$locationProvider', function($routeProvider /*
     $routeProvider
 
         .when('/', {
-            templateUrl: 'pages/hodLogin.html',
-            controller: 'hodLoginController'
+            templateUrl: 'pages/hodDashboard.html',
+            controller: 'hodDashboardController'
         })
 
         .when('/forgot', {
             templateUrl: 'pages/forgot.html',
             controller: 'forgotLoginController'
-        })
-
-        .when('/dashboard', {
-            templateUrl: 'pages/hodDashboard.html',
-            controller: 'hodDashboardController'
         })
 
         .when('/student-login', {
@@ -64,10 +59,8 @@ qecApp.config(['$routeProvider', '$locationProvider', function($routeProvider /*
         .when('/add-teacher',{
             templateUrl: 'pages/addTeacher.html',
             controller: 'teacherRegistrationController'
-        });
-        /*
+        })
         .otherwise({ redirectTo: '/'});
-*/
 
 
     // $locationProvider.html5Mode(true)
