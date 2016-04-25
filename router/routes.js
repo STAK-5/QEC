@@ -50,9 +50,9 @@ module.exports = function (app, express, mongoose) {
             mongodb.saveTeacherData(teacherDetails)
             .then(function (result) {
                 console.log('Teacher Saved', result);
-                res.status(result.status).send(result.msg);
+                res.status(result.status).send('<h2>'+result.msg+'</h2>');
                 }, function (error) {
-                res.status(error.status).send(error.msg);
+                res.status(error.status).send('<h2>'+error.msg+'</h2>');
             });
     }
             
@@ -167,31 +167,31 @@ module.exports = function (app, express, mongoose) {
         }
     });
 
-    router.post('/api/teacher_registration', function (req, res) {
+    // router.post('/api/teacher_registration', function (req, res) {
 
-        ///*VALIDATION ON PENDING - DIRECT SENDING TO SERVER AT THE MOMENT :)*/
-        //req.checkBody('name', 'Account id is required').notEmpty();
-        //req.checkBody('email', 'Email Not Valid').isEmail();
-        //req.checkBody('cellphone', 'Contact should not be empty').notEmpty();
-        //req.checkBody('department', 'Password is required').notEmpty();
-        //
-        //
-        //var formValidationErrors = req.validationErrors();
-        //if (formValidationErrors) res.status(502).send({msg: 'Field Provided Not Valid'});
-        //else {
-        mongodb = require('./../dbpack/mongodb.js')(TeacherSchema, q);
+    //     ///*VALIDATION ON PENDING - DIRECT SENDING TO SERVER AT THE MOMENT :)*/
+    //     //req.checkBody('name', 'Account id is required').notEmpty();
+    //     //req.checkBody('email', 'Email Not Valid').isEmail();
+    //     //req.checkBody('cellphone', 'Contact should not be empty').notEmpty();
+    //     //req.checkBody('department', 'Password is required').notEmpty();
+    //     //
+    //     //
+    //     //var formValidationErrors = req.validationErrors();
+    //     //if (formValidationErrors) res.status(502).send({msg: 'Field Provided Not Valid'});
+    //     //else {
+    //     mongodb = require('./../dbpack/mongodb.js')(TeacherSchema, q);
 
-        console.log('request body ', req.body);
-        mongodb.saveTeacherData(req.body)
-            .then(function (result) {
-                console.log('Teacher Saved', result);
-                res.status(result.status).send(result.msg);
-            }, function (error) {
-                res.status(error.status).send(error.msg);
-            });
-        //}
+    //     console.log('request body ', req.body);
+    //     mongodb.saveTeacherData(req.body)
+    //         .then(function (result) {
+    //             console.log('Teacher Saved', result);
+    //             res.status(result.status).send(result.msg);
+    //         }, function (error) {
+    //             res.status(error.status).send(error.msg);
+    //         });
+    //     //}
 
-    });
+    // });
 
     router.post('/api/submit_quiz', function (req, res) {
 

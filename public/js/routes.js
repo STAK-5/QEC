@@ -31,11 +31,11 @@ qecApp.config(['$routeProvider', '$locationProvider', function($routeProvider /*
             controller: 'graphController'
         })
 
-/*        .when('/student-registration', {
+        .when('/student-registration', {
             templateUrl: 'pages/studentRegistration.html',
             controller: 'studentRegistrationController'
         })
-*/
+
         //  .when('/std', {
         //     templateUrl: 'pages/studentDashboard.html',
         //     controller: 'studentDashboardController'

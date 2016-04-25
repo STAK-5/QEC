@@ -237,34 +237,31 @@ qecApp.controller('studentRegistrationController', ['$scope', '$log', '$location
         $scope.accountid = '';
         $scope.password = '';
         $scope.conf_password = '';
-        $scope.msg = 'REGISTRATION';
+        $scope.msg = '';
         $scope.errclass = '';
         $scope.printMessage = function (errmsg, errclass) {
+            console.info('error class: ', errclass);
             $scope.msg = errmsg;
             $scope.errclass = errclass;
             $scope.accountid = '';
             $scope.password = '';
             $scope.conf_password = '';
             $timeout(function () {
-                $log.info('count down to 5');
-                $scope.msg = 'REGISTRATION';
+                $scope.msg = '';
             }, 5000);
-
-                $scope.errclass = '';
         };
         $scope.addLocalAccount = function () {
-            $scope.errclass = 'alert alert-info text-center';
-            $scope.msg = 'Please Wait...';
+            $scope.printMessage('Please Wait...', 'alert-info text-center');
             $http.post('/api/registration', {
                 accountid: $scope.accountid,
                 password: $scope.password,
                 conf_password: $scope.conf_password
             }).success(function (result) {
                 console.log(result);
-                $scope.printMessage(result.msg, 'alert alert-success text-center')
+                $scope.printMessage(result.msg, 'alert-success text-center');
             }).error(function (error) {
-                console.log(error.msg);
-                $scope.printMessage(error.msg, 'alert alert-danger text-center')
+                console.log(error);
+                $scope.printMessage(error, 'alert-danger text-center');
             });
         }
     }]);

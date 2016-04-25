@@ -110,8 +110,7 @@ module.exports = function(Schema, q){
                    teacherDts.save(function(err){
                        if(err){
                            console.log('Error on save.');
-                           promise.reject({status: 500, msg: 'Error in saving data to database'});
-                           throw err;
+                           promise.reject({status: 500, msg: 'Unable to Register! [Name, Email, Contact] should be unique. '});
                        } else {
                            console.log('Teacher Details Saved.');
                            promise.resolve({status: 200, msg: 'Teacher Details Saved.'});
@@ -121,9 +120,9 @@ module.exports = function(Schema, q){
             });
             return promise.promise;
         },
+        
         getallteacher: function(){
             var promise = q.defer();
-            
             Schema.find({}, function(err, result){
                 if(err) promise.reject(err);
                 else promise.resolve(result);                     
