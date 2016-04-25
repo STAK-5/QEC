@@ -5,27 +5,23 @@ app.controller('hodLoginController', ['$scope', '$log', '$http', '$location', '$
     
     
     function ($scope, $log, $http, $location, $timeout, $window) {
+        console.log('HOD login controller [INVOKED]');
 
-        console.log('hod Login Controller');
-
-        
         $scope.hodEmail = '';
         $scope.hodPassword = '';
-        $scope.msg = 'HOD Login';
+        $scope.err = '';
         $scope.errclass = '';
+        $scope.wait = false;
+        $scope.attempts = 0;
         $scope.printMessage = function (errmsg, errclass) {
             $scope.msg = errmsg;
             $scope.errclass = errclass;
-             
-            $timeout(function () {
-                $log.info('count down to 5');
-                $scope.msg = 'HOD Login';
-                $scope.errclass = '';
-            }, 5000);
-
         };
 
         $scope.login = function () {
+            console.log('$scope.attempts: ', $scope.attempts);
+            $scope.err = ''; 
+            $scope.wait = true;
             $scope.msg = 'Please Wait...';
             $scope.errclass = 'alert alert-info text-center';
             $log.info('ng-POST req to /api/hodLogin with ', $scope.hodEmail, $scope.hodPassword);
@@ -34,14 +30,20 @@ app.controller('hodLoginController', ['$scope', '$log', '$http', '$location', '$
                 email: $scope.hodEmail,
                 password: $scope.hodPassword
             }).success(function (result) {
+                    $scope.wait = false;
+                    $scope.err = 200;
                     $log.info (result + ' successfully logged in');
                     $location.path('/');
                     $window.location.reload();
                })
                 .error(function (data, status) {
-                    $log.error('err: ', data.msg);
-                    $scope.printMessage(data.msg, 'alert alert-danger text-center no-gutter');
-                    $window.location.reload();    
-            })
+                    $scope.attempts = data.att;
+                    $scope.wait =  false;
+                    $log.error('err: ', data);
+                    $scope.err = data.status;
+                    $timeout(function(){
+                        $scope.err = '';
+                    },5000) 
+        })
         };
     }]);

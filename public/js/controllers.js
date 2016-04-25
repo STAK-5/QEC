@@ -16,22 +16,19 @@ qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherM
         $scope.value = teacherParser.value;
         $scope.graphValue = null;
 
-        $scope.logout = function () {
+        $scope.logout = function(){
+            console.info('Logout function invoked');
             $http.get('/logout');
-            $timeout(function(){
-                console.log('timeout-> reloading page');
-                $window.location.reload();
-            }, 1000)    
-    }
-
+            $window.location.reload();
+        }
         $scope.logTeacher = function (event) {
 
             if (event.target.name) {
                 $scope.value = event.target.name;
                 $scope.$watch('value', function () {
                     teacherParser.value = event.target.name;
-
                     console.log('On dashboard' + teacherParser.value);
+                    
                 });
             }
 
@@ -47,7 +44,8 @@ qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherM
             }).error(function (data, status) {
                 $log.info('err at getting details: ', data);
             })
-
+               
+            
 
         }
     }]);
@@ -184,17 +182,17 @@ qecApp.controller('sliderController', ['$scope', '$timeout', 'QueueService', fun
 
     var INTERVAL = 5000,
         slides = [
-            { id: "image00", src: "imgs/Slider/DUETFromMM.jpg" },
+            {id: "image00", src: "imgs/Slider/DUETFromMM.jpg"},
             //{id: "image00", src: "imgs/Slider/DUETFromMM.jpg"},
-            { id: "image02", src: "imgs/Slider/FlagMarch.jpg" },
+            {id: "image02", src: "imgs/Slider/FlagMarch.jpg"},
             //{id: "image02", src: "imgs/Slider/FlagMarch.jpg"},
-            { id: "image03", src: "imgs/Slider/Audi.jpg" },
+            {id: "image03", src: "imgs/Slider/Audi.jpg"},
             //{id: "image03", src: "imgs/Slider/Audi.jpg"},
-            { id: "image03", src: "imgs/Slider/DUET.jpg" },
+            {id: "image03", src: "imgs/Slider/DUET.jpg"},
             //{id: "image03", src: "imgs/Slider/DUET.jpg"},
-            { id: "image03", src: "imgs/Slider/DUET2.jpg" },
+            {id: "image03", src: "imgs/Slider/DUET2.jpg"},
             //{id: "image03", src: "imgs/Slider/DUET2.jpg"},
-            { id: "image03", src: "imgs/Slider/DUET3.jpg" },
+            {id: "image03", src: "imgs/Slider/DUET3.jpg"},
             //{id: "image03", src: "imgs/Slider/DUET3.jpg"}
 
         ];
@@ -252,10 +250,9 @@ qecApp.controller('sliderController', ['$scope', '$timeout', 'QueueService', fun
     loadSlides();
 }]);
 
-qecApp.controller('hodLoginController', ['$scope', '$log', '$http', '$location', '$timeout', '$window',
+qecApp.controller('hodLoginController', ['$scope', '$log', '$http', '$location', '$timeout',
 
-
-    function ($scope, $log, $http, $location, $timeout, $window) {
+    function ($scope, $log, $http, $location, $timeout) {
 
         console.log('hod Login Controller');
 
@@ -285,15 +282,13 @@ qecApp.controller('hodLoginController', ['$scope', '$log', '$http', '$location',
                 email: $scope.hodEmail,
                 password: $scope.hodPassword
             }).success(function (result) {
-                $log.info(result + ' successfully logged in');
-                $location.path('/dashboard');
-                $window.location.reload
-            })
+                    $log.info (result + ' successfully logged in');
+                    $location.path('/dashboard')
+                })
                 .error(function (data, status) {
                     $log.error('err: ', data.msg);
                     $scope.printMessage(data.msg, 'alert alert-danger text-center no-gutter');
-                    $window.location.reload();    
-            })
+                })
         };
     }]);
 
@@ -308,7 +303,7 @@ qecApp.controller('ratingController', ['$scope', 'starsParser', 'questionParser'
         console.log('Stars on rating controller', $scope.ratingValue);
     });
 
-    $scope.text = ['Never', 'Sometimes', 'Usually', 'Most of time', 'Always'];
+    $scope.text = ['Never', 'Sometimes', 'Usually', 'Most of time', 'Always' ];
 
 }]);
 
@@ -413,20 +408,20 @@ qecApp.controller('studentDashboardController', ['$scope', '$routeParams', 'teac
     $scope.teacherImages = {
 
         firstColumn: {
-            image1: { url: 'imgs/Slider/slider/slider5.jpg', value: '1' },
-            image2: { url: 'imgs/Slider/slider/slider2.png', value: '2' },
-            image3: { url: 'imgs/Slider/slider/slider3.png', value: '3' },
-            image4: { url: 'imgs/Slider/slider/slider4.png', value: '4' },
-            image5: { url: 'imgs/Slider/slider/slider5.jpg', value: '4' },
-            image6: { url: 'imgs/Slider/slider/slider6.png', value: '4' }
+            image1: {url: 'imgs/Slider/slider/slider5.jpg', value: '1'},
+            image2: {url: 'imgs/Slider/slider/slider2.png', value: '2'},
+            image3: {url: 'imgs/Slider/slider/slider3.png', value: '3'},
+            image4: {url: 'imgs/Slider/slider/slider4.png', value: '4'},
+            image5: {url: 'imgs/Slider/slider/slider5.jpg', value: '4'},
+            image6: {url: 'imgs/Slider/slider/slider6.png', value: '4'}
         },
         secondColumn: {
-            image5: { url: 'imgs/Slider/slider/slider7.png', value: '5' },
-            image6: { url: 'imgs/Slider/slider/slider6.png', value: '6' },
-            image7: { url: 'imgs/Slider/slider/slider5.jpg', value: '7' },
-            image8: { url: 'imgs/Slider/slider/slider1.jpg', value: '8' },
-            image4: { url: 'imgs/Slider/slider/slider3.png', value: '4' },
-            image9: { url: 'imgs/Slider/slider/slider2.png', value: '4' }
+            image5: {url: 'imgs/Slider/slider/slider7.png', value: '5'},
+            image6: {url: 'imgs/Slider/slider/slider6.png', value: '6'},
+            image7: {url: 'imgs/Slider/slider/slider5.jpg', value: '7'},
+            image8: {url: 'imgs/Slider/slider/slider1.jpg', value: '8'},
+            image4: {url: 'imgs/Slider/slider/slider3.png', value: '4'},
+            image9: {url: 'imgs/Slider/slider/slider2.png', value: '4'}
         },
         /*  thirdColumn: {
          image9  : {url: 'imgs/Slider/slider/slider1.jpg',  value: '9'},

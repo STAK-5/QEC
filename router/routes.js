@@ -5,7 +5,7 @@ module.exports = function (app, express, mongoose) {
     var localaccounts = require('./../dbpack/localaccounts.js')(mongoose);
     var q = require('q');
     var mongodb;
-    var attempts = 0;
+    var attempts = 0, hod_attempts = 0;
     var requestIp = require('request-ip');
     var sess;
     var title = 'HOD Login';
@@ -31,12 +31,22 @@ module.exports = function (app, express, mongoose) {
             email: req.body.email,
             password: req.body.password
         }).then(function (respond) {
+            console.log(respond);
             req.session.login = respond.email;
-            res.status(200).send({ sessiontype: 'hod', sessionkey: respond.email });
+            res.status(200).send(respond);
 
         }, function (err) {
-            res.status(err.status).send({ status: err.status, att: attempts, msg: err.err });
-            router.redirect('/');
+            console.log(err);
+            hod_attempts++;
+            console.log('HOD_LOGIN_ATTEMPTS: ',hod_attempts);
+            res.status(err.status).send({ status: err.status, att: hod_attempts, msg: err.err });
+            if (hod_attempts > 5) {
+                console.log('TIMEOUT, SET_ATTEMPT = 0');
+                setTimeout(function () {
+                    console.log('flushing attempts back to null');
+                    attempts = 0;
+                }, 1000 * 60 * 2)
+            }
         });
     });
     router.post('/api/login', function (req, res, next) {
