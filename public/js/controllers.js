@@ -14,7 +14,7 @@ qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherM
     function ($scope, $routeParams, teacherMaker, teacherParser, $http, $log, $location, $timeout, graphDetails, $window) {
 
         console.info("On HOD");
-        $scope.teachers;
+        $scope.teachers = '';
         $scope.teachers = {
             firstRow: [],
             secondRow: []

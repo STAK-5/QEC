@@ -103,27 +103,68 @@ qecAppStudent.controller('studentLoginController', ['$scope', '$routeParams', '$
         }
     }]);
 
-qecAppStudent.controller('studentDashboardController', ['$scope', '$routeParams', 'teacherParser', 'teacherMaker', function ($scope, $routeParams, teacherParser, teacherMaker) {
+qecAppStudent.controller('studentDashboardController', ['$scope', '$routeParams', 
+'$http', '$log', '$location', '$timeout', '$window', 'teacherParser',
+    function ($scope, $routeParams, $http, $log, $location, $timeout, $window, teacherParser) {
 
-    $scope.teacherValue = $routeParams.value || 1;
+    //$scope.teacherValue = $routeParams.value || 1;
     
     console.info('Got Student');
+    $scope.teachers = {
+        firstRow: [],
+        secondRow: []
+    }
+        
+        
+    $http.get('/api/getteachers')
+        .success(function(response){
+            // response is array of objects- while objects are teachers.;
+            console.info('found something on get request', response);
+            
+            $scope.teachers.firstRow = response.slice(0, 6);
+            if(response.length <= 12) {
+                $scope.teachers.secondRow = response.slice(6, response.length);
+            }
+            else if(response.length > 12){
+                $scope.teachers.secondRow = response.slice(6, 12);
+            }
+            console.info('found something on get request and  now is in scope', $scope.teachers); // test it
+        }).error(function(data, status){
+            console.error(status, data);
+        });
+    
+    //     // $scope.value = teacherParser.value;
+    //     // $scope.graphValue = null;
 
-    $scope.teachers = teacherMaker;
-
-    $scope.value = teacherParser.value;
+    // $scope.logout = function () {
+    //     console.info('Logout function invoked');
+    //     $http.get('/logout');
+    //     $window.location.reload();
+    // }
 
     $scope.logTeacher = function (event) {
+
         if (event.target.name) {
             $scope.value = event.target.name;
             $scope.$watch('value', function () {
-                teacherParser.value = event.target.name;
-                console.log('On dashboard: ' + teacherParser.value);
+                $scope.value = event.target.name;
+                console.log('On dashboard' + $scope.value);
+
             });
         }
-    };
-
-
+        $scope.name = $scope.value;
+        
+        $http.post('/api/getdetails', {
+            name: $scope.name
+        }).success(function(result){
+            teacherParser.value = result;
+            $location.path('/questionnaire');
+        })
+          .error(function(data , status){
+              console.error('error @/api/getdetails: ', data);
+          })        
+}
+    
     $scope.pageValue = '1';
     /*$scope.changePage = function (event) {
 
@@ -135,35 +176,7 @@ qecAppStudent.controller('studentDashboardController', ['$scope', '$routeParams'
         console.info($scope.pageValue);
     }*/
 
-
-    $scope.teacherImages = {
-
-        firstColumn: {
-            image1: { url: 'imgs/Slider/slider/slider5.jpg', value: '1' },
-            image2: { url: 'imgs/Slider/slider/slider2.png', value: '2' },
-            image3: { url: 'imgs/Slider/slider/slider3.png', value: '3' },
-            image4: { url: 'imgs/Slider/slider/slider4.png', value: '4' },
-            image5: { url: 'imgs/Slider/slider/slider5.jpg', value: '4' },
-            image6: { url: 'imgs/Slider/slider/slider6.png', value: '4' }
-        },
-        secondColumn: {
-            image5: { url: 'imgs/Slider/slider/slider7.png', value: '5' },
-            image6: { url: 'imgs/Slider/slider/slider6.png', value: '6' },
-            image7: { url: 'imgs/Slider/slider/slider5.jpg', value: '7' },
-            image8: { url: 'imgs/Slider/slider/slider1.jpg', value: '8' },
-            image4: { url: 'imgs/Slider/slider/slider3.png', value: '4' },
-            image9: { url: 'imgs/Slider/slider/slider2.png', value: '4' }
-        },
-        /*  thirdColumn: {
-         image9  : {url: 'imgs/Slider/slider/slider1.jpg',  value: '9'},
-         image10 : {url: 'imgs/Slider/slider/slider2.png', value: '11'},
-         image11 : {url: 'imgs/Slider/slider/slider3.png', value: '10'},
-         image12 : {url: 'imgs/Slider/slider/slider4.png', value: '12'},
-         image4 : {url: 'imgs/Slider/slider/slider5.jpg', value:'4'},
-         image6 : {url: 'imgs/Slider/slider/slider6.png', value:'4'}
-         },*/
-    };
-
+// $scope.teachers = $scope.teachers2;
 
 }]);
 
@@ -191,12 +204,12 @@ qecAppStudent.controller('questionnaireController', ['$scope', '$routeParams', '
         $scope.teacherValue = $routeParams.value || 1;
 
         $scope.teacher = teacherParser.value;
+        console.info('Teacher is', $scope.teacher);
 
         $scope.questions = questionMaker;
 
         //$scope.teacher = teacherParser;
 
-        console.info(($scope.teacher).toLowerCase());
 
 
         $scope.pageValue = 1;

@@ -15,14 +15,25 @@
 }
 
 #teacherRegistration{
-    margin-top: 100px;
+    margin-top: 5%;
     background-color: #4e5256;
-    /*border-radius: 35% 0% 36% 0%;!important;*/
+    border-radius: 35% 0% 36% 0%!important;
     opacity: 0.85;
+}
+#teacherRegistration img{
+    width: 100%;
+}
+
+#teacherRegistration input{
+    margin-bottom: -10px;
+}
+#teacherRegistration button{
+    margin-bottom: 10px!important;
 }
     
 form{
     padding: 15px;
+    width: 90%;
 }
 
 body{
@@ -438,36 +449,84 @@ form .progress {
     background: orange;
 }
 
-/*-----------------------------------------------------*/
-
-
-.demo {
-    display: inline-block;
-    width: 24%;
-    padding: 10px;
-    -webkit-box-sizing: padding-box;
-    box-sizing: padding-box;
+/*-----------------------------------------*/
+.demo-3 {
+    position:relative;  
+    overflow:hidden;
+    float:left;
+    margin-right:20px;
+    list-style: none;
 }
-.demo textarea {
-    -webkit-box-sizing: padding-box;
-    box-sizing: padding-box;
-    font-family: "Roboto";
-    font-size: 0.9em;
-    height: 32px;
-    padding: 6px 0px;
-    resize: none;
-    text-align: center;
-    width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+.demo-3 figure {
+    margin:0;
+    padding:0;
+    position:relative;
+    cursor:pointer;
+    margin-left:-50px
 }
-.imghvr-blur .figcaption {
-    opacity: 0;
+.demo-3 figure img {
+    display:block;
+    position:relative;
+    z-index:10;
+    padding: 0px;
+    margin-left: 25px;
+    margin-bottom: -5px;
+    margin-right: -10px;  
 }
-.imghvr-blur:hover img{
-    filter:blur(30px);
-    transform:scale(1.2);
-    opacity: 0;}
-.imghvr-blur:hover img .figcaption{
-    opacity: 1;
-    transition-delay:0.6s;
+.demo-3 figure figcaption {
+    display:block;
+    position:absolute;
+    z-index:5;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box
+}
+.demo-3 figure h6 {
+    font-family:'Lato';
+    color:#fff;
+    font-size:20px;
+    text-align:left
+}
+.demo-3 figure p {
+    display:block;
+    font-family:'Lato';
+    font-size:16px;
+    line-height:28px;
+    margin:0;
+    margin-left: 10px;
+    color:#fff;
+    text-align:left
+}
+.demo-3 figure figcaption {
+    top:20px;
+    left:20px;
+    width:100%;
+    height:100%;
+    /*padding:29px 44px;*/
+    /*padding: 100px;*/
+    background-color:rgba(26,76,110,0.5);
+    text-align:center;
+    backface-visibility:hidden;
+    -webkit-transform:rotateY(-180deg);
+    -moz-transform:rotateY(-180deg);
+    transform:rotateY(-180deg);
+    -webkit-transition:all .5s;
+    -moz-transition:all .5s;
+    transition:all .5s
+}
+.demo-3 figure img {
+    backface-visibility:hidden;
+    -webkit-transition:all .5s;
+    -moz-transition:all .5s;
+    transition:all .5s
+}
+.demo-3 figure:hover img,figure.hover img {
+    -webkit-transform:rotateY(180deg);
+    -moz-transform:rotateY(180deg);
+    transform:rotateY(180deg)
+}
+.demo-3 figure:hover figcaption,figure.hover figcaption {
+    -webkit-transform:rotateY(0);
+    -moz-transform:rotateY(0);
+    transform:rotateY(0)
 }

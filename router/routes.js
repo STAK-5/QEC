@@ -195,7 +195,6 @@ module.exports = function (app, express, mongoose) {
 
     router.post('/api/submit_quiz', function (req, res) {
 
-        /*YEH RAHA CATCHER - YAHAN req.body MAIN DATA AYAok...*/
         console.log(req.body.name, req.body.survey);
         mongodb = require('./../dbpack/mongodb.js')(TeacherSchema, q);
         mongodb.getTeacherDetails({ name: req.body.name })
