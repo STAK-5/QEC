@@ -287,7 +287,7 @@ qecAppStudent.controller('questionnaireController', ['$scope', '$routeParams', '
             $scope.printMessage('alert alert-warning text-center', 'Please Wait! Result Being Uploaded.');
             $scope.name = $scope.teacher.name;
             $scope.survey = {
-                date: new Date().getDate() + ', ' + $scope.month[new Date().getMonth()],
+                date: new Dat`e().getDate() + ', ' + $scope.month[new Date().getMonth()],
                 data: $scope.starsArray
             };
 
