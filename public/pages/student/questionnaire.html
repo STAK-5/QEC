@@ -1,52 +1,32 @@
 <nav class="navbar navbar-inverse navbar-top-fixed">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Quality Enhancement Cell - DUET</a>
+            <a class="navbar-brand" href="">Quality Enhancement Cell - DUET</a>
         </div>
     </div>
 </nav>
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-4">
+        <div class="col-md-2 col-sm-3   ">
             <div id="sidebarMenu">
-                <div class="panel list-group">
-                    <img class="img-circle" ng-src="./imgs/Slider/slider/slider1.jpg">
-                    <a href="" class="list-group-item" data-toggle="collapse" data-target="#one" data-parent="#sidebarMenu">Personal info</a>
+                <div class="panel list-group" id="panel">
+                    <a href=""><img class="img-circle img-responsive" ng-src="./imgs/uploaded/{{ teacher.ph_curname }}"></a>
+                    <a href="" class="list-group-item firstItem" data-toggle="collapse" data-target="#one" data-parent="#sidebarMenu">Name</a>
                     <div id="one" class="sublinks collapse">
-                        <a class="list-group-item small">Name: {{ teacher }}</a>
-                        <a class="list-group-item small">2nd Item</a>
+                        <a class="list-group-item small">{{ teacher.name }}</a>
                     </div>
-                    <a href="" class="list-group-item" data-toggle="collapse" data-target="#two" data-parent="#sidebarMenu">Subjects</a>
+                    <a href="" class="list-group-item" data-toggle="collapse" data-target="#two" data-parent="#sidebarMenu">Department</a>
                     <div id="two" class="sublinks collapse">
-                        <a class="list-group-item small">1st Item</a>
-                        <a class="list-group-item small">2nd Item</a>
-                    </div>
-                    <a href="" class="list-group-item" data-toggle="collapse" data-target="#three" data-parent="#sidebarMenu">Projects Guided</a>
-                    <div id="three" class="sublinks collapse">
-                        <a class="list-group-item small">1st Item</a>
-                        <a class="list-group-item small">2nd Item</a>
-                    </div>
-                    <a href="" class="list-group-item" data-toggle="collapse" data-target="#four" data-parent="#sidebarMenu">Education</a>
-                    <div id="four" class="sublinks collapse">
-                        <a class="list-group-item small">1st Item</a>
-                        <a class="list-group-item small">2nd Item</a>
-                    </div>
-                    <a href="" class="list-group-item" data-toggle="collapse" data-target="#five" data-parent="#sidebarMenu">Designation</a>
-                    <div id="five" class="sublinks collapse">
-                        <a class="list-group-item small">1st Item</a>
-                        <a class="list-group-item small">2nd Item</a>
+                        <a class="list-group-item small">{{ teacher.department }}</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-9" ng-hide=" pageValue > 18 ">
+
+        <div class="col-sm-1"></div>
+
+        <div class="col-md-9 col-sm-6 col-xs-12" ng-hide=" pageValue > 18 ">
             <div id="section">
                  <div class="repeat-animation" ng-show="pageValue == question.QuestionNum" ng-repeat="question in questions">
                 <h1>{{ question.Name }}</h1>

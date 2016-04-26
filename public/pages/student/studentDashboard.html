@@ -31,13 +31,11 @@
                                                     <img id="{{ teachers.name }}" name="{{ teachers.name }}" class="line-height col-lg-12 col-xs-12 animated flipInY img-responsive" ng-src="./imgs/uploaded/{{ teachers.ph_curname }}" alt="{{ teachers.name }}'s Image" style="height: 150px">
                                                 <figcaption>
                                                        <p>{{ teachers.name }}</p>
-                                                       <p>Average Stars: {{ teachers.current_average }}</p>
-                                                       <p>Max Average: {{ teachers.max_average }}</p>
                                                    </figcaption>
                                                </figure>
                                            </li>
                                        </ul>
-                                        <button ng-click="logTeacher($event)" class="w3-btn-block w3-hover-border-dark-grey w3-hover-green" name="{{ teachers.name }}">View Details</button>
+                                        <button ng-click="logTeacher($event)" class="w3-btn-block w3-hover-border-dark-grey w3-hover-green" name="{{ teachers.name }}">Go to Questionnaire</button>
                             </div>
                         </div>
                     </div><!-- /.row -->

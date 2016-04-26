@@ -222,17 +222,29 @@ qecAppStudent.controller('questionnaireController', ['$scope', '$routeParams', '
 
             $scope.stars = starsParser.newStars;
 
-            if(newValue >= oldValue){
-                console.info('Next button pressed.');
-                console.info('newValue: ', newValue);
-                $scope.$watch('stars', function () {
-                    $scope.stars = starsParser.newStars;
-                    console.log('Stars on question controller: ' + starsParser.newStars);
+            $scope.$watch('stars', function () {
+                $scope.stars = starsParser.newStars;
+                console.log('Stars on question controller: ' + starsParser.newStars);
+
+                if(newValue >= oldValue){
+                    console.info('Next button pressed.');
+                    console.info('Question Number : ', newValue - 2);
                     ($scope.starsArray).splice($scope.pageValue - 2, 1, starsParser.newStars);
                     console.log('Array: ' + $scope.starsArray);
 
-                });
-            }
+                }
+
+                else if(newValue <= oldValue){
+                    console.info('Back button pressed.');
+                    console.info('Question Number : ', oldValue - 1);
+                    ($scope.starsArray).splice(oldValue - 1, 1, starsParser.newStars);
+                    console.log('Array: ' + $scope.starsArray);
+
+                }
+
+            });/*
+
+
             if(newValue <= oldValue){
                 console.info('Back button pressed.');
                 console.info('newValue: ', newValue);
@@ -243,7 +255,7 @@ qecAppStudent.controller('questionnaireController', ['$scope', '$routeParams', '
                     console.log('Array: ' + $scope.starsArray);
 
                 });
-            }
+            }*/
 
 
         });
