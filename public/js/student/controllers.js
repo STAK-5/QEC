@@ -269,7 +269,7 @@ qecAppStudent.controller('questionnaireController', ['$scope', '$routeParams', '
 
 
         var value = 2.365;
-
+            console.info('name details: ', $scope.teacher.name );
         $log.info('rounded/ ', value.toFixed(1));
         $scope.updateDetails = function () {
             $scope.printMessage('alert alert-warning text-center', 'Please Wait! Result Being Uploaded.');
@@ -287,7 +287,7 @@ qecAppStudent.controller('questionnaireController', ['$scope', '$routeParams', '
             console.log('Date: ', $scope.survey.date);
             console.log('Date - Survey: ', $scope.survey.date);
             $http.post('/api/submit_quiz', {
-                name: $scope.name,
+                name: $scope.teacher.name,
                 survey: $scope.survey
             }).success(function (result) {
                 $log.info('Update Success - CLIENT ');

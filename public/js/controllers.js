@@ -204,7 +204,8 @@ f
 
 }]);
 
-qecApp.controller('graphController', ['$scope', '$routeParams', 'teacherParser', 'graphDetails', function ($scope, $routeParams, teacherParser, graphDetails) {
+qecApp.controller('graphController', ['$scope', '$routeParams', 'teacherParser', 'graphDetails','$http','$window',
+    function ($scope, $routeParams, teacherParser, graphDetails,$http, $window) {
 
     $scope.teacherGraph = $routeParams.value || 1;
 
@@ -227,6 +228,13 @@ qecApp.controller('graphController', ['$scope', '$routeParams', 'teacherParser',
     $scope.average = $scope.graph.total_averages;
 
     console.info('On Graph Result: ', $scope.graph.survey_records)
+    
+    
+    $scope.logout = function () {
+            console.info('Logout function invoked');
+            $http.get('/logout');
+            $window.location.reload();
+        }
 }]);
 
 

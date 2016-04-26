@@ -35,7 +35,8 @@ if (MODE == 'development') {
     app.use(session({
         secret: config.sessionSecret,
         store: new ConnectMongo({
-            url: config.dbURL,
+            mongoConnection: mongoose.connections[0],
+            // url: config.dbURL,
             stringify: true
         }),
         saveUninitialized: true,
