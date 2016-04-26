@@ -340,7 +340,6 @@ module.exports = function (app, express, mongoose) {
 
 
 
-
     router.get('/logout', function (req, res) {
         req.session.destroy(function (err) {
             if (err) {

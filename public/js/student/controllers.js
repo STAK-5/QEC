@@ -108,13 +108,13 @@ qecAppStudent.controller('studentDashboardController', ['$scope', '$routeParams'
     function ($scope, $routeParams, $http, $log, $location, $timeout, $window, teacherParser) {
 
     //$scope.teacherValue = $routeParams.value || 1;
-    
+
     console.info('Got Student');
     $scope.teachers = {
         firstRow: [],
         secondRow: []
     }
-        
+
         
     $http.get('/api/getteachers')
         .success(function(response){
@@ -181,18 +181,106 @@ qecAppStudent.controller('studentDashboardController', ['$scope', '$routeParams'
 }]);
 
 
-qecAppStudent.controller('ratingController', ['$scope', 'starsParser', 'questionParser', function ($scope, starsParser, questionParser) {
+qecAppStudent.controller('ratingController', ['$scope', '$log','$http', '$timeout','$location', 'starsParser', 'teacherParser','$window',
+    function ($scope, $log, $http, $timeout, $location, starsParser, teacherParser, $window) {
 
-    $scope.ratingValue = 1;
+    $scope.teacher = teacherParser.value;
+    console.info('Teacher is', $scope.teacher.name);
+
+    //$scope.ratingValue = 1;
 
     $scope.starsArray = [];
 
-    $scope.$watch('ratingValue', function (newValue, oldValue) {
+    $scope.$watch('ratingValue', function () {
         starsParser.newStars = $scope.ratingValue;
         console.log('Stars on rating controller', $scope.ratingValue);
     });
 
+    $scope.pageValue = 1;
+
+    $scope.updateStars = function(event){
+        if(event.target.id == 'next'){
+            console.log("Array updated, page was: ", $scope.pageValue);
+            $scope.pageValue++;
+            ($scope.starsArray).splice($scope.pageValue - 2, 1, $scope.ratingValue);
+            console.info("Array after update: ", $scope.starsArray);
+            $scope.ratingValue = 1;
+        }
+        else if(event.target.id == 'back'){
+            console.log("Array updated page was: ", $scope.pageValue);
+            $scope.pageValue--;
+            $scope.ratingValue = 1;
+            $scope.starsArray.pop();
+
+            console.info("Array after update: ", $scope.starsArray);
+            //OK. Ya aesa karo mai tumharay pass pull karkay chala jata hoon. Doctor kay pass jana hai. Ammi nay kaha hai.
+        }
+    }
     $scope.text = ['Never', 'Sometimes', 'Usually', 'Most of time', 'Always'];
+
+
+    $scope.printMessage = function (errclass, errmsg) {
+        $scope.errclass = errclass;
+        $scope.errmsg = errmsg;
+    };
+    $scope.month = new Array();
+    $scope.month[0] = "January";
+    $scope.month[1] = "February";
+    $scope.month[2] = "March";
+    $scope.month[3] = "April";
+    $scope.month[4] = "May";
+    $scope.month[5] = "June";
+    $scope.month[6] = "July";
+    $scope.month[7] = "August";
+    $scope.month[8] = "September";
+    $scope.month[9] = "October";
+    $scope.month[10] = "November";
+    $scope.month[11] = "December";
+
+        //submit and logout wala kahan hai . Button ya uska function? func;
+        // Update details hai uska naam jo may saelect kar raha hoon
+
+    var value = 2.365;
+    console.info('name details: ', $scope.teacher.name );
+    $log.info('rounded/ ', value.toFixed(1));
+    //Yay hai -->>
+    $scope.updateDetails = function () {
+        $scope.printMessage('alert alert-warning text-center', 'Please Wait! Result Being Uploaded.');
+        $scope.name = $scope.teacher.name;
+        $scope.survey = {
+            date: new Date().getDate() + ', ' + $scope.month[new Date().getMonth()],
+            data: $scope.starsArray
+        };
+
+        var total = 0;
+        for (i = 0; i < $scope.survey.data.length; i++)
+            total += $scope.survey.data[i];
+        console.log('name: ', $scope.name);
+        console.log('Data - Average: ', total / $scope.survey.data.length);
+        console.log('Date: ', $scope.survey.date);
+        console.log('Date - Survey: ', $scope.survey.date);
+        $http.post('/api/submit_quiz', {
+            name: $scope.teacher.name,
+            survey: $scope.survey
+        }).success(function (result) {
+            $log.info('Update Success - CLIENT ');
+            $scope.printMessage('alert alert-success text-center', result.msg);
+            //$location.path('/student-login');
+
+            $timeout(function () {
+                $http.get('/api/logout');
+                $window.location.reload();
+            }, 10000);
+        }).error(function (data, status) {
+            $log.error('RESPONSE ERR - CLIENT ', data);
+            console.log(data);
+            $scope.printMessage('alert alert-danger text-center', data.msg);
+            $timeout(function () {
+                $scope.printMessage(undefined, undefined)
+            }, 10000);
+        });
+    };
+
 
 }]);
 
@@ -203,16 +291,13 @@ qecAppStudent.controller('questionnaireController', ['$scope', '$routeParams', '
 
         $scope.teacherValue = $routeParams.value || 1;
 
-        $scope.teacher = teacherParser.value;
-        console.info('Teacher is', $scope.teacher);
-
         $scope.questions = questionMaker;
 
         //$scope.teacher = teacherParser;
 
 
 
-        $scope.pageValue = 1;
+        /*$scope.pageValue = 1;
 
         $scope.starsArray = [];
         $scope.$watch('pageValue', function (newValue, oldValue) {
@@ -242,7 +327,7 @@ qecAppStudent.controller('questionnaireController', ['$scope', '$routeParams', '
 
                 }
 
-            });/*
+            });*//*
 
 
             if(newValue <= oldValue){
@@ -258,65 +343,7 @@ qecAppStudent.controller('questionnaireController', ['$scope', '$routeParams', '
             }*/
 
 
-        });
 
-
-        $scope.printMessage = function (errclass, errmsg) {
-            $scope.errclass = errclass;
-            $scope.errmsg = errmsg;
-        };
-        $scope.month = new Array();
-        $scope.month[0] = "January";
-        $scope.month[1] = "February";
-        $scope.month[2] = "March";
-        $scope.month[3] = "April";
-        $scope.month[4] = "May";
-        $scope.month[5] = "June";
-        $scope.month[6] = "July";
-        $scope.month[7] = "August";
-        $scope.month[8] = "September";
-        $scope.month[9] = "October";
-        $scope.month[10] = "November";
-        $scope.month[11] = "December";
-
-
-        var value = 2.365;
-            console.info('name details: ', $scope.teacher.name );
-        $log.info('rounded/ ', value.toFixed(1));
-        $scope.updateDetails = function () {
-            $scope.printMessage('alert alert-warning text-center', 'Please Wait! Result Being Uploaded.');
-            $scope.name = $scope.teacher.name;
-            $scope.survey = {
-                date: new Date().getDate() + ', ' + $scope.month[new Date().getMonth()],
-                data: $scope.starsArray
-            };
-
-            var total = 0;
-            for (i = 0; i < $scope.survey.data.length; i++)
-                total += $scope.survey.data[i];
-            console.log('name: ', $scope.name);
-            console.log('Data - Average: ', total / $scope.survey.data.length);
-            console.log('Date: ', $scope.survey.date);
-            console.log('Date - Survey: ', $scope.survey.date);
-            $http.post('/api/submit_quiz', {
-                name: $scope.teacher.name,
-                survey: $scope.survey
-            }).success(function (result) {
-                $log.info('Update Success - CLIENT ');
-                $scope.printMessage('alert alert-success text-center', result.msg);
-                $location.path('/student-login');
-                $timeout(function () {
-                    $scope.printMessage('', '')
-                }, 10000);
-            }).error(function (data, status) {
-                $log.error('RESPONSE ERR - CLIENT ', data);
-                console.log(data);
-                $scope.printMessage('alert alert-danger text-center', data.msg);
-                $timeout(function () {
-                    $scope.printMessage(undefined, undefined)
-                }, 10000);
-            });
-        };
 
 
 }]);

@@ -7,7 +7,7 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" ng-controller="ratingController as rating" >
         <div class="col-md-2 col-sm-3   ">
             <div id="sidebarMenu">
                 <div class="panel list-group" id="panel">
@@ -28,25 +28,26 @@
 
         <div class="col-md-9 col-sm-6 col-xs-12" ng-hide=" pageValue > 18 ">
             <div id="section">
-                 <div class="repeat-animation" ng-show="pageValue == question.QuestionNum" ng-repeat="question in questions">
-                <h1>{{ question.Name }}</h1>
-                <p>{{ question.Q }}</p>
+                <div class="repeat-animation" ng-show="pageValue == question.QuestionNum" ng-repeat="question in questions">
+                    <h1>{{ question.Name }}</h1>
+                    <p>{{ question.Q }}</p>
 
-            </div>
+                </div>
 
-            <div ng-controller="ratingController as rating">
-                <div star-rating ng-model="ratingValue" on-rating-select="rating.rateFunction(rating)"></div>
+            <div >
+                <div star-rating ng-model="ratingValue" ng-init="ratingValue = 1" on-rating-select="rating.rateFunction(rating)"></div>
                 <h4 ng-show="ratingValue === 1">{{ text[0] }}</h4>
                 <h4 ng-show="ratingValue === 2">{{ text[1] }}</h4>
                 <h4 ng-show="ratingValue === 3">{{ text[2] }}</h4>
                 <h4 ng-show="ratingValue === 4">{{ text[3] }}</h4>
                 <h4 ng-show="ratingValue === 5">{{ text[4] }}</h4>
-            </div>
-            </div>
-            <div id="{{ pageValue }}">
-                <div class="animated" ng-class="{'zoomOutUp': pageValue > 18}" ng-hide="pageValue === 19"><button class="btn w3-btn btn-lg w3-red w3-hover-blue-grey pull-left" ng-disabled="pageValue == 1" ng-click="pageValue = pageValue-1">Back</button></div>
-                <div class="animated" ng-class="{'zoomOutUp': pageValue > 18}" ng-hide="pageValue === 19"><button class="btn w3-btn btn-lg w3-green w3-hover-blue-grey pull-right"  ng-click="pageValue = pageValue+1">Next</button></div>
 
+                <div id="{{ pageValue }}">
+                    <div class="animated" ng-class="{'zoomOutUp': pageValue > 18}" ng-hide="pageValue === 19"><button class="btn w3-btn btn-lg w3-red w3-hover-blue-grey pull-left" id="back" ng-click="updateStars($event)" ng-disabled="pageValue == 1" >Back</button></div>
+                    <div class="animated" ng-class="{'zoomOutUp': pageValue > 18}" ng-hide="pageValue === 19"><button class="btn w3-btn btn-lg w3-green w3-hover-blue-grey pull-right"  id="next" ng-click="updateStars($event)">Next</button></div>
+
+                </div>
+            </div>
             </div>
         </div>
         <div class="col-mod-9" ng-show=" pageValue > 18">

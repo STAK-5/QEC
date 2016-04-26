@@ -33,28 +33,16 @@
                                             <img id="{{ teachers.name }}" name="{{ teachers.name }}" class="line-height col-lg-12 col-xs-12 animated flipInY img-responsive" ng-src="./imgs/uploaded/{{ teachers.ph_curname }}" alt="{{ teachers.name }}'s Image" style="height: 150px">
                                             <figcaption>
                                                 <p>{{ teachers.name }}</p>
-                                                <p>Average Stars: {{ teachers.current_average }}</p>
-                                                <p>Max Average: {{ teachers.max_average }}</p>
+                                                <p>{{ teachers.department }}</p>
+                                                <p>{{ teachers.email}}</p>
+
                                             </figcaption>
                                         </figure>
                                     </li>
                                 </ul>
                                 <button ng-click="logTeacher($event)" class="w3-btn-block w3-hover-border-dark-grey w3-hover-green" name="{{ teachers.name }}">Go to Questionnaire</button>
 
-                                <div class="w3-card-24 w3-blue-grey line-height">
-                                       <ul class="demo-3 effect">
-                                           <li>
-                                               <figure>
-                                                    <img id="{{ teachers.name }}" name="{{ teachers.name }}" class="line-height col-lg-12 col-xs-12 animated flipInY img-responsive" ng-src="./imgs/uploaded/{{ teachers.ph_curname }}" alt="{{ teachers.name }}'s Image" style="height: 150px">
-                                                <figcaption>
-                                                       <p>{{ teachers.name }}</p>
-                                                   </figcaption>
-                                               </figure>
-                                           </li>
-                                       </ul>
-                                        <button ng-click="logTeacher($event)" class="w3-btn-block w3-hover-border-dark-grey w3-hover-green" name="{{ teachers.name }}">Go to Questionnaire</button>
->>>>>>> 6b593997e561668a4741ecb0a222cc462e539302
-                            </div>
+
                         </div>
                     </div>
                     <!-- /.row -->
