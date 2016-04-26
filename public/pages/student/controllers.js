@@ -94,9 +94,9 @@ qecApp.controller('studentDashboardController', ['$scope', '$routeParams', 'teac
 }]);
 
 
-qecApp.controller('questionnaireController', ['$scope', '$routeParams', 'questionMaker', 'starsParser', 'questionParser', 'teacherParser', '$log', '$http', '$timeout', '$location',
+qecApp.controller('questionnaireController', ['$scope', '$routeParams', 'questionMaker', 'starsParser', 'questionParser', 'teacherParser', '$log', '$http', '$timeout', '$location','$window',
 
-    function ($scope, $routeParams, questionMaker, starsParser, questionParser, teacherParser, $log, $http, $timeout, $location) {
+    function ($scope, $routeParams, questionMaker, starsParser, questionParser, teacherParser, $log, $http, $timeout, $location, $window) {
 
         $scope.teacherValue = $routeParams.value || 1;
 
@@ -171,12 +171,11 @@ qecApp.controller('questionnaireController', ['$scope', '$routeParams', 'questio
                 name: $scope.name,
                 survey: $scope.survey
             }).success(function (result) {
-                $log.info('Update Success - CLIENT ');
-                $scope.printMessage('alert alert-success text-center', result.msg);
-                $location.path('/student-login');
-                $timeout(function () {
-                    $scope.printMessage('', '')
-                }, 10000);
+                $log.info('Update Success - CLIENT ????????????????????????????????');
+                // $scope.printMessage('alert alert-success text-center', result);
+                console.info('work done as expected');
+                // $location.path('/student-login');
+                // $window.location.reload();
             }).error(function (data, status) {
                 $log.error('RESPONSE ERR - CLIENT ', data);
                 console.log(data);
@@ -185,7 +184,10 @@ qecApp.controller('questionnaireController', ['$scope', '$routeParams', 'questio
                     $scope.printMessage(undefined, undefined)
                 }, 10000);
             });
-        };
+        
+            $http.get('/logout');
+            $window.location.reload();
+    };
 
 
     }]);
