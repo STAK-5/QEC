@@ -204,12 +204,15 @@ f
 
 }]);
 
-qecApp.controller('graphController', ['$scope', '$routeParams', 'teacherParser', 'graphDetails','$http','$window',
-    function ($scope, $routeParams, teacherParser, graphDetails,$http, $window) {
+qecApp.controller('graphController', ['$scope', '$routeParams', 'teacherParser', 'questionMaker', 'graphDetails','$http','$window',
+    function ($scope, $routeParams, teacherParser, questionMaker, graphDetails, $http, $window) {
 
     $scope.teacherGraph = $routeParams.value || 1;
 
     $scope.teacher = teacherParser;
+
+    $scope.questions = questionMaker.questions;
+
 
     //$scope.yAxisValues = "1.1, 2.2, 3.3, 4.4";
 

@@ -1,12 +1,6 @@
 <nav class="navbar navbar-inverse navbar-top-fixed">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a class="navbar-brand" href="#/">QEC - DUET</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
@@ -21,39 +15,31 @@
         </div>
     </div>
 </nav>
-<div style="background-color: #FFFFFF">
-<h3 style="color: #000000;">
+
+<h3>
     Name: {{ teacher.value }}
 </h3>
 
-
-<!--
-<div>
-    <dl ng-repeat="data in teacher">
-        <dt>{{data}}</dt>
-    </dl>
-</div>
--->
-
 <div id="graph" class="container" ng-show="teacher.value">
     <c3chart bindto-id="chart1">
-        <chart-legend show-legend="true" data-legend-colr="red"/>
+        <chart-legend show-legend="true" datat-legend-color="#000000"/>
         <chart-colors color-pattern="#F00, #E89414, #1a9f10, #339976, #aaa"/>
-        <chart-size chart-height=275 />
-		<chart-tooltip show-tooltip="true" tooltip-name="Questions" tooltip-title="Questions" tooltip_>
+        <chart-size chart-height=270 />
+		<chart-tooltip show-tooltip="true" />
 
 
         <!--<chart-column column-id="x"
                       column-values="1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18"
         />-->
-        <chart-column font-color="red" ng-repeat="survey in surveyResults" column-id="{{survey.date}}"
-                      column-name="{{survey.date}}"
-                      column-values="{{survey.data.join(',')}}"
+        <chart-column ng-repeat="survey in surveyResults" column-id="{{survey.date}}"
+                      column-name="{{ survey.date }}"
+                      column-values="{{ survey.data.join(',') }}"
                       column-type="line"/
-            <chart-axes values-x="x" values-y="{{(surveyResults.date).join(',')}}"/>
+            <chart-axes values-x="x" values-y="{{ (surveyResults.date).join(',') }}"/>
 
             <chart-axis>
-                <chart-axis-x axis-position="outer-center"
+                <chart-axis-x axis-id="x"
+                              axis-position="outer-center"
                               axis-label="Questions"
                 >
                 </chart-axis-x>
@@ -91,9 +77,8 @@
         <chart-pie expand="true"/>
         <chart-legend legend-position="right"
     </c3chart>
+</div>
 
-</div>
-</div>
 <footer>
     <div class="navbar navbar-inverse navbar-fixed-bottom">
         <div class="container">
