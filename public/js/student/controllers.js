@@ -265,12 +265,9 @@ qecAppStudent.controller('ratingController', ['$scope', '$log','$http', '$timeou
         }).success(function (result) {
             $log.info('Update Success - CLIENT ');
             $scope.printMessage('alert alert-success text-center', result.msg);
-            //$location.path('/student-login');
-
-            $timeout(function () {
-                $http.get('/api/logout');
-                $window.location.reload();
-            }, 10000);
+            $http.get('/logout');
+            $location.path('/');
+            $window.location.reload();
         }).error(function (data, status) {
             $log.error('RESPONSE ERR - CLIENT ', data);
             console.log(data);

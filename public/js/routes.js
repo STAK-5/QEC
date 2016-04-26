@@ -18,7 +18,6 @@ qecApp.config(['$routeProvider', '$locationProvider', function($routeProvider /*
         
         .when('/about', {
             templateUrl: 'pages/about.html',
-            controller: 'sliderController'
         })
 
         .when('/graph', {

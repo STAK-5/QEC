@@ -72,7 +72,7 @@ qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherM
         $scope.error = 404;
         $scope.msg = "404. Not Found";
 
-    }]);
+   }]);
     
     qecApp.controller('sliderController', ['$scope', '$timeout', 'QueueService', function ($scope, $timeout, QueueService) {
 

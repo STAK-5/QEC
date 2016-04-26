@@ -1,67 +1,77 @@
-<div class="container">
-    <div class="row">
-        <h1>About</h1>
-            <p>Quality Enhancement Cell (QEC) is a web based platform to evaluate the teachers
-                level of teaching. It provides 'HOD', a detailed stats on how teacher is teaching.</p>
-    </div>
-</div>
 
-<div class="col-lg-4 col-md-7"></div>
-<h1 class="text-center">Meet The 404 Developers!</h1>
+		<div class="container">
+			<section id="grid" class="grid clearfix">
+			
+				<a href="https://web.facebook.com/saadi.dev" data-path-hover="m 180,34.57627 -180,0 L 0,0 180,0 z">
+					<figure>
+						<img src="./../imgs/1.png" />
+						<svg viewBox="0 0 180 240" preserveAspectRatio="none"><path d="M 180,160 0,218 0,0 180,0 z"/></svg>
+						<figcaption>
+							<h2>SAAD ABBASI </h2>
+							<p>Developer of Javascript JQuery, Angular, Node, Express. Contribution as back-end and project redirection as Leader. <br>itssaadabbasi@gmail</p>
+							
+						</figcaption>
+					</figure>
+				</a>
+				<a href="" data-path-hover="m 180,34.57627 -180,0 L 0,0 180,0 z">
+					<figure>
+						<img src="./../imgs/3.png" />
+						<svg viewBox="0 0 180 240" preserveAspectRatio="none"><path d="M 180,160 0,218 0,0 180,0 z"/></svg>
+						<figcaption>
+							<h2>SYED M. TAHA</h2>
+							<p>Primarily a Developer of JavaScript, Angular but transforms into Designer if it comes in his way, Contributed as Client-Side Developer. taha@domain.com</p>
+						</figcaption>
+					</figure>
+				</a>
+				<a href="#" data-path-hover="m 180,34.57627 -180,0 L 0,0 180,0 z">
+					<figure>
+						<img src="./../imgs/5.png" />
+						<svg viewBox="0 0 180 240" preserveAspectRatio="none"><path d="M 180,160 0,218 0,0 180,0 z"/></svg>
+						<figcaption>
+							<h2>KAINAT ALI</h2>
+							<p>An enthusiastic Designer. For her there are up to 50 shades of every color, contributed as design and layout (UI),  UX. kaiantali@domain.com</p>
+						</figcaption>
+					</figure>
+				</a>
+				<a href="#" data-path-hover="m 180,34.57627 -180,0 L 0,0 180,0 z">
+					<figure>
+						<img src="./../imgs/7.png" />
+						<svg viewBox="0 0 180 240" preserveAspectRatio="none"><path d="M 180,160 0,218 0,0 180,0 z"/></svg>
+						<figcaption>
+							<h2>AQSA MANZOOR</h2>
+							<p>Designer HTML5, CSS3, Bootstrap, and Bootstrap UI, also contributed in other stages like information gathering and  documentation. manzooraqsa407@yahoo</p>
+							
+						</figcaption>
+					</figure>
+				</a>
+				
+				
+		</div><!-- /container -->
+		<script>
+			(function() {
+	
+				function init() {
+					var speed = 250,
+						easing = mina.easeinout;
 
-<div class="row w3-container ">
-    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-        <div class="w3-card-24 w3-blue-grey">
+					[].slice.call ( document.querySelectorAll( '#grid > a' ) ).forEach( function( el ) {
+						var s = Snap( el.querySelector( 'svg' ) ), path = s.select( 'path' ),
+							pathConfig = {
+								from : path.attr( 'd' ),
+								to : el.getAttribute( 'data-path-hover' )
+							};
 
-            <img src='./imgs/SaadBlack.jpg' alt="Avatar" class="col-lg-12 img-responsive center-block" style="height: 350px">
-            <div class="w3-container w3-center">
-                <p class="info">Saad Abbasi is the team lead and back-end developer of QEC. He is the backbone of Team Dynoes.
-                    Saad loves to follow the global market trends in programming. His interests includes programming and
-                    football. He is a Java and JavaScript developer with hands on in MongoDB.
-                </p>
-            </div>
-        </div>
-    </div>
+						el.addEventListener( 'mouseenter', function() {
+							path.animate( { 'path' : pathConfig.to }, speed, easing );
+						} );
 
-    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-        <div class="w3-card-24 w3-blue-grey ">
-            <img src='./imgs/SMTaha.jpg' alt="Avatar" class="col-lg-12 img-responsive center-block" style="height: 350px">
-            <div class="w3-container w3-center" style="display: block">
-                <p class="info">Taha is the front-end developer and a programming enthusiast. He has keen intrest in table tennis.
-                    He is currently learning AngularJS.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-        <div class="w3-card-24">
+						el.addEventListener( 'mouseleave', function() {
+							path.animate( { 'path' : pathConfig.from }, speed, easing );
+						} );
+					} );
+				}
 
-            <img src='./imgs/Aqsa.jpg' alt="Avatar" class="col-lg-12 img-responsive center-block" style="height: 350px">
-            <div class="w3-container w3-center w3-blue-grey " style="display: block">
-                <p class="info">Aqsa Manzoor is the all-rounder of Team Dynoes. She not only contributed in designing
-                    the project but also helps in  various important logical aspects. Aside from her designing
-                    and developing skills she also knows how to build great reports.</p>
-            </div>
-        </div>
-    </div>
+				init();
 
-    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-        <div class="w3-card-24">
-
-            <img src='./imgs/Kainat.png' alt="Avatar" class=" col-lg-12  img-responsive center-block" style="height: 350px">
-            <div class="w3-container w3-center w3-blue-grey" style="display: block">
-                <p class="info">Kainat Ali is  the designer of QEC. She has designed the face of the project. Her ideas and
-                    desingning skills are just off the marks. She always try to groom up her design skills.</p>
-            </div>
-        </div>
-    </div>
-</div>
-<footer class="container">
-    <div class="nav navbar navbar-fixed-bottom">
-        <div class="container">
-            <ul class="nav">
-                <li><a class="navbar-brand pull-left" href="">DUET - Quality Enhancement Cell</a></li>
-                <li><a class="navbar-brand pull-right" href="#">404Developers</a></li>
-            </ul>
-        </div>
-    </div>
-</footer>
+			})();
+		</script>

@@ -341,6 +341,7 @@ module.exports = function (app, express, mongoose) {
 
 
     router.get('/logout', function (req, res) {
+        console.log('Logout Invoked.');
         req.session.destroy(function (err) {
             if (err) {
                 console.log(err);
@@ -348,10 +349,6 @@ module.exports = function (app, express, mongoose) {
                 res.redirect('/');
             }
         });
-
-    });
-    app.listen(3000, function () {
-        console.log("App Started on PORT 3000");
     });
     app.use('/', router);
 };
