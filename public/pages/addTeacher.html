@@ -9,7 +9,7 @@
             <form novalidate id="teacherRegistration" name="teacherRegistration" role="form">
 
                 <img src="imgs/duet-up.png" class="img-responsive">
-                <h3 class = {{msgclass}}>{{msg}}</h3>
+                <h3>Teacher Registration</h3>
                 <div class="form-group has-feedback has-feedback-left"
                      ng-class="{ 'has-error' :teacherRegistration.teacherRegistrationName.$touched && teacherRegistration.teacherRegistrationName.$invalid,
                                     'has-success': teacherRegistration.teacherRegistrationName.$valid
@@ -72,6 +72,7 @@
                     <i class="glyphicon glyphicon-education form-control-feedback"></i>
                 </div>
                 <!--<p class="{{errclass}}">{{errmsg}}</p>-->
+                <p style=" margin:10px 0; border-radius: 20px; font-weight: bold; opacity=0.75;" class = {{msgclass}}>{{msg}}</p>
                 <button class="btn btn-lg btn-block" href="#/" role="button"
                         ng-disabled="teacherRegistration.$invalid" ng-click="register()">SUBMIT</button>
                 <br>

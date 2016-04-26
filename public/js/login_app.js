@@ -41,6 +41,7 @@ app.controller('hodLoginController', ['$scope', '$log', '$http', '$location', '$
                     $scope.wait =  false;
                     $log.error('err: ', data);
                     $scope.err = data.status;
+                    $scope.hodPassword = '';
                     $timeout(function(){
                         $scope.err = '';
                     },5000) 

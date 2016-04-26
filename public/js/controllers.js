@@ -28,7 +28,7 @@ qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherM
                 $scope.$watch('value', function () {
                     teacherParser.value = event.target.name;
                     console.log('On dashboard' + teacherParser.value);
-                    
+
                 });
             }
 
@@ -44,10 +44,10 @@ qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherM
             }).error(function (data, status) {
                 $log.info('err at getting details: ', data);
             })
-               
-            
-
         }
+        $scope.error = 404;
+        $scope.msg = "404. Not Foound";
+        
     }]);
 
 qecApp.controller('studentLoginController', ['$scope', '$routeParams', '$log', '$http', '$location', '$timeout',
@@ -615,7 +615,7 @@ qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location
         $scope.teacherContact = '';
         $scope.teacherDepartment = '';
         $scope.msgclass = '';
-        $scope.msg = 'TEACHER REGISTRATION';
+        $scope.msg = '';
 
 
         $scope.printMessage = function (msg, msgclass) {
@@ -623,11 +623,12 @@ qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location
             $scope.msgclass = msgclass;
 
             $timeout(function () {
-                $scope.msg = 'TEACHER REGISTRATION';
+                $scope.msg = '';
                 $scope.msgclass = '';
             }, 5000)
         }
         $scope.register = function () {
+            $scope.printMessage('Please Wait', 'alert-info text-center');
             $log.log('info', $scope.teacherName,
                 $scope.teacherEmail,
                 $scope.teacherContact,
@@ -644,10 +645,10 @@ qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location
                 contact: $scope.teacherContact
             }).success(function (result) {
                 $log.info('SAVE SUCCESS 200/OK', result);
-                $scope.printMessage(result, 'alert alert-success text-center');
+                $scope.printMessage(result, 'alert-success text-center');
             }).error(function (err) {
                 $log.error('ERROR AT SAVING TEACHER DATA', err);
-                $scope.printMessage(err, 'alert alert-danger text-center');
+                $scope.printMessage(err, 'alert-danger text-center');
 
             })
         }

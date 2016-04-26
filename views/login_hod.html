@@ -52,13 +52,17 @@
                         <input type="password" class="form-control" id="hodPassword" name="hodPassword" ng-model="hodPassword" placeholder="Password" required ng-minlength="8" ng-maxlength="16">
                         <i class="glyphicon glyphicon-lock form-control-feedback"></i>
                     
-                    
+                    <!--YEH 5 jo paragraph hain refresh karne per akser dikh rhy hn... 
+                    matlb blink ho k ghaeb-->
                     </div>
-                    <p style=" margin:10px 0; border-radius: 20px; font-weight: bold;" class="alert-warning text-center" ng-show="attempts > 5">Session Locked, Login Attempt Not Allowed</p>
+                    <div ng-cloak>
+                         <p style=" margin:10px 0; border-radius: 20px; font-weight: bold;" class="alert-warning text-center" ng-show="attempts > 5">Session Locked, Login Attempt Not Allowed</p>
                     <p style=" margin:10px 0; border-radius: 20px; font-weight: bold;" class="alert-success text-center" ng-show="err == 200">Login Successful</p>
                     <p style=" margin:10px 0; border-radius: 20px; font-weight: bold;" class="alert-info text-center" ng-show="wait">Please Wait!</p>
-                    <p style=" margin:10px 0; border-radius: 20px; font-weight: bold;" class="alert-danger text-center" ng-show="err == 400">No Match Found</p>
+                    <p style=" margin:10px 0; border-radius: 20px; font-weight: bold;" ng-class="{'alert-danger text-center': error}" ng-show="err == error">No Match Found</p>
                     <p style=" margin:10px 0; border-radius: 20px; font-weight: bold;" class="alert-danger text-center" ng-show="err == 401">Wrong Password</p>
+                    </div>
+                   
                     <button type="button" class="btn btn-lg btn-block" ng-disabled="hodLogin.$invalid || attempts>5" ng-click="login()">
                     <strong>Sign In</strong></button>
                     <h5 class="text-center"><a href="#/forgot"> Forgot Password?</a></h5>
