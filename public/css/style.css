@@ -530,3 +530,320 @@ form .progress {
     -moz-transform:rotateY(0);
     transform:rotateY(0)
 }
+
+/*--------------------------------------------------*/
+
+
+body{
+    background-color: #23282d !important;
+    color: #a7a9ab !important;
+}
+
+.navbar-inverse{
+    background-color: #2f363c !important;
+}
+
+ul.dropdown-menu{
+    background-color: #2f363c !important;
+    color: #a7a9ab !important;
+}
+
+ul.dropdown-menu li a{
+    background-color: #2f363c !important;
+    color: #a7a9ab !important;
+}
+
+ul.dropdown-menu li.divider{
+    background-color: #000 !important;
+}
+
+ul.dropdown-menu li a:hover{
+    background-color: #3b444c !important;
+    color: #fff !important;
+}
+
+ul.dropdown-menu li a:focus{
+    background-color: #3b444c !important;
+    color: #fff !important;
+}
+
+/*
+#navbar ul.nav li a{
+	color: #a7a9ab;
+}
+
+#navbar ul.nav li a:hover{
+	color: #fff;
+}
+
+.navbar-header a{
+	color: #a7a9ab !important;
+}
+
+.navbar-header a:hover{
+	color: #fff !important;
+}
+*/
+
+@media only screen and (max-width: 767px) {
+    #panel {
+        display: none;
+    }
+}
+
+
+#panel {
+    margin-top: -20px;
+    background-color: #2f363c !important;
+    height: 564px;
+    /*border: 1px solid #000 !important;*/
+    margin-left: -15px;
+    padding: 0 ;
+}
+
+.list-group a img{
+    margin-top: 5% !important;
+    margin-left: 0 !important;
+    height: 100%;
+}
+
+.list-group .list-group-item{
+    background-color: #2f363c;
+    border-color: #000;
+}
+
+.list-group .list-group-item.firstItem{
+    margin-top: 6% !important;
+}
+
+.list-group a{
+    color: #a7a9ab !important;
+}
+
+.list-group a:hover{
+    background-color: #3b444c !important;
+    color: #fff !important;
+}
+
+.list-group a:focus{
+    background-color: #3b444c !important;
+    color: #fff;
+}
+
+#section p{
+    color: #099d2c;
+}
+
+ul.pagination li a{
+    border-color: #000 !important;
+}
+
+ul.pagination li a{
+    background-color: #2f363c;
+    color: #a7a9ab;
+}
+
+ul.pagination li a:hover{
+    background-color: #3b444c;
+    color: #fff !important;
+}
+
+ul.pagination li a:focus{
+    background-color: #3b444c;
+    color: #fff;
+}
+
+footer ul.nav li a{
+    color: #a7a9ab !important;
+}
+
+footer ul.nav li a:hover{
+    color: #fff !important;
+}
+
+footer ul.nav li a:focus{
+    color: #fff !important;
+}
+
+/*
+#section{
+	padding: 80px 15px 0px 15px;
+	text-align: center;
+	font-size: 20px;
+}
+
+#section h1{
+	font-size: 45px;
+	color: #a7a9ab !important;
+	text-transform: uppercase;
+}
+
+#section p{
+	font-size: 25px;
+	padding-top: 20px;
+	line-height: 1.5em;
+	color: #099d2c;
+}
+
+#stars-default{
+	padding: 20px 0px 0px 0px;
+}
+
+.pagination{
+	position: relative;
+	top: 30px;
+	border-color: #ccc !important;
+}
+*/
+
+
+
+@media (min-width: 1200px){
+    #sidebarMenu .panel{
+        width: 210px !important;
+    }
+    #section{
+        padding: 70px 15px 0px 15px;
+        text-align: center;
+        font-size: 20px;
+    }
+    #section h1{
+        font-size: 45px;
+        color: #a7a9ab !important;
+        text-transform: uppercase;
+    }
+    #section p{
+        font-size: 25px;
+        padding-top: 20px;
+        line-height: 1.5em;
+    }
+    #stars-default{
+        padding: 20px 0px 0px 0px;
+    }
+    .pagination{
+        position: relative;
+        top: 30px;
+        border-color: #ccc !important;
+    }
+}
+
+@media (max-width: 1199px) and (min-width: 992px){
+    #sidebarMenu .panel{
+        width: 190px !important;
+    }
+    #section{
+        padding: 50px 15px 0px 15px;
+        text-align: center;
+        font-size: 20px;
+    }
+    #section h1{
+        font-size: 45px;
+        color: #a7a9ab !important;
+        text-transform: uppercase;
+    }
+    #section p{
+        font-size: 25px;
+        padding-top: 20px;
+        line-height: 1.5em;
+    }
+    #stars-default{
+        padding: 20px 0px 0px 0px;
+    }
+    .pagination{
+        position: relative;
+        top: 30px;
+        border-color: #ccc !important;
+    }
+}
+
+@media (max-width: 992px){
+    #sidebarMenu .panel{
+        width: 180px !important;
+    }
+    #section{
+        padding: 30px 5px 0px 5px;
+        text-align: center;
+        font-size: 20px;
+    }
+    #section h1{
+        font-size: 42px;
+        color: #a7a9ab !important;
+        text-transform: uppercase;
+    }
+    #section p{
+        font-size: 22px;
+        padding-top: 20px;
+        line-height: 1.5em;
+    }
+    #stars-default{
+        padding: 20px 0px 0px 0px;
+    }
+    .pagination{
+        position: relative;
+        top: 30px;
+        border-color: #ccc !important;
+    }
+}
+
+@media (max-width: 767px) and (min-width: 500px){
+    #sidebarMenu .panel{
+        width: 160px !important;
+    }
+    #section{
+        padding: 15px 0px 0px 20px !important;
+        text-align: center;
+        font-size: 17px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+    #section h1{
+        font-size: 40px;
+        color: #a7a9ab !important;
+        text-transform: uppercase;
+    }
+    #section p{
+        font-size: 20px;
+        padding-top: 20px;
+        line-height: 1.5em;
+    }
+    #stars-default{
+        padding: 10px 0px 0px 10px !important;
+    }
+    .pagination{
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 0px 0px 0px 20px !important;
+        position: relative;
+        top: 5px !important;
+        border-color: #ccc !important;
+    }
+}
+@media (max-width: 500px){
+    #sidebarMenu .panel{
+        width: 100px !important;
+    }
+    #section{
+        padding: 10px 0px 0px 20px;
+        text-align: center;
+        font-size: 10px;
+    }
+    #section p{
+        font-size: 20px;
+        padding-left: 10px !important;
+    }
+    #section h1{
+        font-size: 30px;
+    }
+    #stars-default{
+        padding: 0px 0px 0px 10px;
+    }
+    .pagination{
+        position: relative;
+        top: -20px;
+        padding-bottom: 5px !important;
+        border-color: #ccc !important;
+        padding-left: 10px !important;
+
+    }
+
+}
