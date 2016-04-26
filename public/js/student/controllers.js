@@ -342,9 +342,5 @@ qecAppStudent.controller('questionnaireController', ['$scope', '$routeParams', '
                 });
             }*/
 
-
-
-
-
 }]);
 
