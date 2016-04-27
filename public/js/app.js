@@ -2,7 +2,7 @@
  * Created by syedmuhammadtaha on 3/26/16.
  */
 
-var qecApp = angular.module('qecApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'gridshore.c3js.chart']);
+var qecApp = angular.module('qecApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'gridshore.c3js.chart','ngFileUpload']);
 
 
 qecApp.controller('sliderController', function ($scope, $timeout, QueueService) {

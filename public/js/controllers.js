@@ -8,7 +8,7 @@ qecApp.controller('forgotLoginController', ['$scope', '$routeParams', function (
 
 }]);
 
-qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherMaker', 'teacherParser', '$http', '$log', '$location', '$timeout', 'graphDetails','$window',
+qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherMaker', 'teacherParser', '$http', '$log', '$location', '$timeout', 'graphDetails', '$window',
     function ($scope, $routeParams, teacherMaker, teacherParser, $http, $log, $location, $timeout, graphDetails, $window) {
 
         $scope.teachers = teacherMaker;
@@ -16,7 +16,7 @@ qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherM
         $scope.value = teacherParser.value;
         $scope.graphValue = null;
 
-        $scope.logout = function(){
+        $scope.logout = function () {
             console.info('Logout function invoked');
             $http.get('/logout');
             $window.location.reload();
@@ -47,7 +47,7 @@ qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherM
         }
         $scope.error = 404;
         $scope.msg = "404. Not Foound";
-        
+
     }]);
 
 qecApp.controller('studentLoginController', ['$scope', '$routeParams', '$log', '$http', '$location', '$timeout',
@@ -182,17 +182,17 @@ qecApp.controller('sliderController', ['$scope', '$timeout', 'QueueService', fun
 
     var INTERVAL = 5000,
         slides = [
-            {id: "image00", src: "imgs/Slider/DUETFromMM.jpg"},
+            { id: "image00", src: "imgs/Slider/DUETFromMM.jpg" },
             //{id: "image00", src: "imgs/Slider/DUETFromMM.jpg"},
-            {id: "image02", src: "imgs/Slider/FlagMarch.jpg"},
+            { id: "image02", src: "imgs/Slider/FlagMarch.jpg" },
             //{id: "image02", src: "imgs/Slider/FlagMarch.jpg"},
-            {id: "image03", src: "imgs/Slider/Audi.jpg"},
+            { id: "image03", src: "imgs/Slider/Audi.jpg" },
             //{id: "image03", src: "imgs/Slider/Audi.jpg"},
-            {id: "image03", src: "imgs/Slider/DUET.jpg"},
+            { id: "image03", src: "imgs/Slider/DUET.jpg" },
             //{id: "image03", src: "imgs/Slider/DUET.jpg"},
-            {id: "image03", src: "imgs/Slider/DUET2.jpg"},
+            { id: "image03", src: "imgs/Slider/DUET2.jpg" },
             //{id: "image03", src: "imgs/Slider/DUET2.jpg"},
-            {id: "image03", src: "imgs/Slider/DUET3.jpg"},
+            { id: "image03", src: "imgs/Slider/DUET3.jpg" },
             //{id: "image03", src: "imgs/Slider/DUET3.jpg"}
 
         ];
@@ -282,9 +282,9 @@ qecApp.controller('hodLoginController', ['$scope', '$log', '$http', '$location',
                 email: $scope.hodEmail,
                 password: $scope.hodPassword
             }).success(function (result) {
-                    $log.info (result + ' successfully logged in');
-                    $location.path('/dashboard')
-                })
+                $log.info(result + ' successfully logged in');
+                $location.path('/dashboard')
+            })
                 .error(function (data, status) {
                     $log.error('err: ', data.msg);
                     $scope.printMessage(data.msg, 'alert alert-danger text-center no-gutter');
@@ -303,7 +303,7 @@ qecApp.controller('ratingController', ['$scope', 'starsParser', 'questionParser'
         console.log('Stars on rating controller', $scope.ratingValue);
     });
 
-    $scope.text = ['Never', 'Sometimes', 'Usually', 'Most of time', 'Always' ];
+    $scope.text = ['Never', 'Sometimes', 'Usually', 'Most of time', 'Always'];
 
 }]);
 
@@ -408,20 +408,20 @@ qecApp.controller('studentDashboardController', ['$scope', '$routeParams', 'teac
     $scope.teacherImages = {
 
         firstColumn: {
-            image1: {url: 'imgs/Slider/slider/slider5.jpg', value: '1'},
-            image2: {url: 'imgs/Slider/slider/slider2.png', value: '2'},
-            image3: {url: 'imgs/Slider/slider/slider3.png', value: '3'},
-            image4: {url: 'imgs/Slider/slider/slider4.png', value: '4'},
-            image5: {url: 'imgs/Slider/slider/slider5.jpg', value: '4'},
-            image6: {url: 'imgs/Slider/slider/slider6.png', value: '4'}
+            image1: { url: 'imgs/Slider/slider/slider5.jpg', value: '1' },
+            image2: { url: 'imgs/Slider/slider/slider2.png', value: '2' },
+            image3: { url: 'imgs/Slider/slider/slider3.png', value: '3' },
+            image4: { url: 'imgs/Slider/slider/slider4.png', value: '4' },
+            image5: { url: 'imgs/Slider/slider/slider5.jpg', value: '4' },
+            image6: { url: 'imgs/Slider/slider/slider6.png', value: '4' }
         },
         secondColumn: {
-            image5: {url: 'imgs/Slider/slider/slider7.png', value: '5'},
-            image6: {url: 'imgs/Slider/slider/slider6.png', value: '6'},
-            image7: {url: 'imgs/Slider/slider/slider5.jpg', value: '7'},
-            image8: {url: 'imgs/Slider/slider/slider1.jpg', value: '8'},
-            image4: {url: 'imgs/Slider/slider/slider3.png', value: '4'},
-            image9: {url: 'imgs/Slider/slider/slider2.png', value: '4'}
+            image5: { url: 'imgs/Slider/slider/slider7.png', value: '5' },
+            image6: { url: 'imgs/Slider/slider/slider6.png', value: '6' },
+            image7: { url: 'imgs/Slider/slider/slider5.jpg', value: '7' },
+            image8: { url: 'imgs/Slider/slider/slider1.jpg', value: '8' },
+            image4: { url: 'imgs/Slider/slider/slider3.png', value: '4' },
+            image9: { url: 'imgs/Slider/slider/slider2.png', value: '4' }
         },
         /*  thirdColumn: {
          image9  : {url: 'imgs/Slider/slider/slider1.jpg',  value: '9'},
@@ -608,16 +608,9 @@ qecApp.controller('studentDashboardController', ['$scope', '$routeParams', 'teac
 
 }]);
 
-qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location', '$http', '$timeout',
-    function ($scope, $log, $location, $http, $timeout) {
-        $scope.teacherName = '';
-        $scope.teacherEmail = '';
-        $scope.teacherContact = '';
-        $scope.teacherDepartment = '';
-        $scope.msgclass = '';
-        $scope.msg = '';
-
-
+qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location', '$http', '$timeout', 'Upload',
+    function ($scope, $log, $location, $http, $timeout, Upload) {
+        
         $scope.printMessage = function (msg, msgclass) {
             $scope.msg = msg;
             $scope.msgclass = msgclass;

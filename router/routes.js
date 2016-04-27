@@ -270,6 +270,12 @@ module.exports = function (app, express, mongoose) {
             });
 
     });
+    
+    app.post('/api/filecheck', function(req,res){
+        console.log('checking if the file is available');
+        console.log('req.body: ', req.body);
+        console.log('req.files: ',req.files);
+    })
 
 
     app.get('/logout', function (req, res) {
