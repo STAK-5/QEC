@@ -16,4 +16,9 @@ qecAppStudent.config(['$routeProvider', '$locationProvider', function($routeProv
            templateUrl: 'pages/student/studentDashboard.html',
            controller: 'studentDashboardController'
        })
+
+        .when('/about', {
+            templateUrl: 'pages/about.html',
+        })
+
 }]);
