@@ -23,3 +23,4 @@ qecApp.service('graphDetails', function () {
 
     this.graph;
 });
+

@@ -38,6 +38,7 @@ qecAppStudent.directive('bgImage', function ($window) {
         });
     }
 });
+
 qecAppStudent.directive('starRating', function() {
     return {
         restrict: 'EA',

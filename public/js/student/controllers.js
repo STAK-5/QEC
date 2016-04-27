@@ -1,9 +1,28 @@
+qecAppStudent.animation('.slide-animation', function ($window) {
+    return {
+
+        enter: function (element, done) {
+            var startPoint = $window.innerWidth * 0.5,
+                tl = new TimelineLite();
+
+            tl.fromTo(element, 3.5, { opacity:0}, {opacity: 1});
+
+        },
+
+        leave: function (element, done) {
+            var tl = new TimelineLite();
+
+            tl.to(element, 3.5, {opacity: 0, onComplete: done});
+        }
+    };
+});
+
+
 qecAppStudent.controller('sliderController', ['$scope', '$timeout', 'QueueService', function ($scope, $timeout, QueueService) {
 
-
-    var INTERVAL = 15000,
+    var INTERVAL = 5000,
         slides = [
-            { id: "image00", src: "imgs/Slider/DUETFromMM.jpg" },
+            { id: "image00", src: "./imgs/Slider/DUETFromMM.jpg" },
             //{id: "image00", src: "imgs/Slider/DUETFromMM.jpg"},
             { id: "image02", src: "imgs/Slider/FlagMarch.jpg" },
             //{id: "image02", src: "imgs/Slider/FlagMarch.jpg"},
@@ -13,7 +32,7 @@ qecAppStudent.controller('sliderController', ['$scope', '$timeout', 'QueueServic
             //{id: "image03", src: "imgs/Slider/DUET.jpg"},
             { id: "image03", src: "imgs/Slider/DUET2.jpg" },
             //{id: "image03", src: "imgs/Slider/DUET2.jpg"},
-            { id: "image03", src: "imgs/Slider/DUET3.jpg" },
+            { id: "image03", src: "imgs/Slider/DUET3.jpg" }
             //{id: "image03", src: "imgs/Slider/DUET3.jpg"}
 
         ];
