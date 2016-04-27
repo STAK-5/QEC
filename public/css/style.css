@@ -847,3 +847,32 @@ footer ul.nav li a:focus{
     }
 
 }
+
+/*---------------------------*/
+
+
+p{
+	color: #a7a9ab;
+}
+
+p.info{
+	color: #333;
+}
+
+h3{
+	color: #099d2c;
+}
+
+img .img-circle{
+	border-radius: 2px #fff !important;
+}
+.jumbotron{
+	background: #99e2ab;
+	opacity: 0.8;
+	width: 100% !important;
+}
+
+#setposition{
+	position: relative;
+	bottom: 100px;
+}
