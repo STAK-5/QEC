@@ -2,9 +2,7 @@
  * Created by syedmuhammadtaha on 3/26/16.
  */
 
-var qecApp = angular.module('qecApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'gridshore.c3js.chart']);
-
-// var qecAppStudent =  angular.module('qecApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);
+var qecAppStudent =  angular.module('qecAppStudent', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);
 
 
 // qecApp.controller('sliderController', function ($scope, $timeout, QueueService) {

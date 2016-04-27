@@ -11,6 +11,7 @@ qecApp.controller('forgotLoginController', ['$scope', '$routeParams', function (
 qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherMaker', 'teacherParser', '$http', '$log', '$location', '$timeout', 'graphDetails', '$window',
     function ($scope, $routeParams, teacherMaker, teacherParser, $http, $log, $location, $timeout, graphDetails, $window) {
 
+        console.info("On HOD");
         $scope.teachers = teacherMaker;
 
         $scope.value = teacherParser.value;
@@ -283,4 +284,3 @@ qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location
             })
         }
     }]);
-

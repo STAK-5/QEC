@@ -12,14 +12,21 @@ module.exports = function (app, express, mongoose) {
     router.get('/', function (req, res, next) {
         console.log('[SESSIONS] value: ', req.session.login);
         if (req.session.login !== undefined)
-            res.render('index');
+            res.render('hodDashboard');
         else
             res.render('login_hod', { title: title });
     });
-
+    
+    app.get('/std', function(req, res){
+        console.log('Student [SESSION_LOOKUP]: ', req.session.std_sess);
+        req.session.std_sess != undefined ? res.render('studentDashboard') : res.render('studentLogin');       
+        
+    })
     app.get(function (req, res) {
         res.send('Not found');
     })
+    
+    
     router.post('/api/hodlogin', function (req, res, next) {
         console.log('sessions : ', req.session.login);
         mongodb = require('./../dbpack/mongodb.js')(hodSchema, q);
@@ -54,6 +61,7 @@ module.exports = function (app, express, mongoose) {
         console.log('request body: ', req.body);
         mongodb.login_std(req.body)
             .then(function (std) {
+                req.session.std_sess = std.accountid;
                 console.log('got back: ', std);
                 res.status(200).send(std);
             }, function (err) {
