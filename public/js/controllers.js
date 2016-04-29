@@ -3,6 +3,7 @@
  */
 
 
+
 qecApp.controller('forgotLoginController', ['$scope', '$routeParams', function ($scope, $routeParams) {
 
 
@@ -246,41 +247,78 @@ qecApp.controller('studentRegistrationController', ['$scope', '$log', '$location
         }
     }]);
 
-qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location', '$http', '$timeout', 'Upload',
+qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location', '$http', '$timeout','Upload',
     function ($scope, $log, $location, $http, $timeout, Upload) {
         
-        $scope.printMessage = function (msg, msgclass) {
-            $scope.msg = msg;
-            $scope.msgclass = msgclass;
+        console.info('ready to upload file.');
+        
+        $scope.f = '';
+        $scope.uploadFiles = function(file, errFiles) {
+        $scope.f = file;
+    console.log('got file from form:' ,file)
+        $scope.errFile = errFiles && errFiles[0];
+        if (file) {
+            file.upload = Upload.upload({
+                url: 'http://localhost:3301/api/filecheck',
+                data: {file: file}
+            });
 
-            $timeout(function () {
-                $scope.msg = '';
-                $scope.msgclass = '';
-            }, 5000)
-        }
-        $scope.register = function () {
-            $scope.printMessage('Please Wait', 'alert-info text-center');
-            $log.log('info', $scope.teacherName,
-                $scope.teacherEmail,
-                $scope.teacherContact,
-                $scope.teacherDepartment);
-
-            $http.post('/api/teacher_registration', {
-                name: $scope.teacherName,
-                email: $scope.teacherEmail,
-                department: $scope.teacherDepartment,
-                survey_records: [],
-                total_averages: [],
-                current_average: null,
-                max_average: null,
-                contact: $scope.teacherContact
-            }).success(function (result) {
-                $log.info('SAVE SUCCESS 200/OK', result);
-                $scope.printMessage(result, 'alert-success text-center');
-            }).error(function (err) {
-                $log.error('ERROR AT SAVING TEACHER DATA', err);
-                $scope.printMessage(err, 'alert-danger text-center');
-
+            file.upload.then(function (response) {
+                $timeout(function () {
+                    file.result = response.data;
+                });
+            }, function (response) {
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            }, function (evt) {
+                file.progress = Math.min(100, parseInt(100.0 * 
+                                         evt.loaded / evt.total));
+            });
+        }   
+    }
+    
+        $scope.register = function(){
+            console.info('sending file to server: ', $scope.f);
+            $http.post('/api/uploadfile',{
+                file:$scope.f
+            }).success(function(res){
+                //do something
+            }).error(function(data, status){
+                
             })
         }
+        // $scope.printMessage = function (msg, msgclass) {
+        //     $scope.msg = msg;
+        //     $scope.msgclass = msgclass;
+
+        //     $timeout(function () {
+        //         $scope.msg = '';
+        //         $scope.msgclass = '';
+        //     }, 5000)
+        // }
+        // $scope.register = function () {
+        //     $scope.printMessage('Please Wait', 'alert-info text-center');
+        //     $log.log('info', $scope.teacherName,
+        //         $scope.teacherEmail,
+        //         $scope.teacherContact,
+        //         $scope.teacherDepartment);
+
+        //     $http.post('/api/teacher_registration', {
+        //         name: $scope.teacherName,
+        //         email: $scope.teacherEmail,
+        //         department: $scope.teacherDepartment,
+        //         survey_records: [],
+        //         total_averages: [],
+        //         current_average: null,
+        //         max_average: null,
+        //         contact: $scope.teacherContact
+        //     }).success(function (result) {
+        //         $log.info('SAVE SUCCESS 200/OK', result);
+        //         $scope.printMessage(result, 'alert-success text-center');
+        //     }).error(function (err) {
+        //         $log.error('ERROR AT SAVING TEACHER DATA', err);
+        //         $scope.printMessage(err, 'alert-danger text-center');
+
+        //     })
+        // }
     }]);

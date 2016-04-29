@@ -9,6 +9,23 @@ module.exports = function (app, express, mongoose) {
     var requestIp = require('request-ip');
     var sess;
     var title = 'HOD Login';
+
+    var multer = require('multer');
+    var upload = multer({ dest: 'uploads/' })
+
+
+    router.post('/api/fileupload', upload.single('avatar'), function (req, res, next) {
+        console.log('file upload attempts _active');
+        console.log('form content: ', req.body);
+        console.log('form files: ', req.file);
+        // req.file.name = req.file.originalname;
+        //console.log('form files: ', req.files);
+        if(req.file != undefined || req.file != {}){
+            res.status(200).send({response: 'File uploaded.'});            
+            
+        }
+
+    });
     router.get('/', function (req, res, next) {
         console.log('[SESSIONS] value: ', req.session.login);
         if (req.session.login !== undefined)
@@ -16,17 +33,17 @@ module.exports = function (app, express, mongoose) {
         else
             res.render('login_hod', { title: title });
     });
-    
-    app.get('/std', function(req, res){
+
+    app.get('/std', function (req, res) {
         console.log('Student [SESSION_LOOKUP]: ', req.session.std_sess);
-        req.session.std_sess != undefined ? res.render('studentDashboard') : res.render('studentLogin');       
-        
+        req.session.std_sess != undefined ? res.render('studentDashboard') : res.render('studentLogin');
+
     })
     app.get(function (req, res) {
         res.send('Not found');
-    })
-    
-    
+    });
+
+
     router.post('/api/hodlogin', function (req, res, next) {
         console.log('sessions : ', req.session.login);
         mongodb = require('./../dbpack/mongodb.js')(hodSchema, q);
@@ -45,7 +62,7 @@ module.exports = function (app, express, mongoose) {
         }, function (err) {
             console.log(err);
             hod_attempts++;
-            console.log('HOD_LOGIN_ATTEMPTS: ',hod_attempts);
+            console.log('HOD_LOGIN_ATTEMPTS: ', hod_attempts);
             res.status(err.status).send({ status: err.status, att: hod_attempts, msg: err.err });
             if (hod_attempts > 5) {
                 console.log('TIMEOUT, SET_ATTEMPT = 0');
@@ -278,15 +295,11 @@ module.exports = function (app, express, mongoose) {
             });
 
     });
-    
-    app.post('/api/filecheck', function(req,res){
-        console.log('checking if the file is available');
-        console.log('req.body: ', req.body);
-        console.log('req.files: ',req.files);
-    })
 
 
-    app.get('/logout', function (req, res) {
+
+
+    router.get('/logout', function (req, res) {
         req.session.destroy(function (err) {
             if (err) {
                 console.log(err);

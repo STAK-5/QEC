@@ -6,10 +6,11 @@
 </div>
     <div class="row">
         <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
-            <form novalidate id="teacherRegistration" name="teacherRegistration" role="form">
+            <form novalidate id="teacherRegistration" name="teacherRegistration" role="form"
+            enctype="multipart/form-data" method="POST" action="/api/fileupload">
 
-                <img src="imgs/duet-up.png" class="img-responsive">
-                <h3>Teacher Registration</h3>
+                <!--<img src="imgs/duet-up.png" class="img-responsive">-->
+                <h1 class="text-center">Teacher Registration</h1>
                 <div class="form-group has-feedback has-feedback-left"
                      ng-class="{ 'has-error' :teacherRegistration.teacherRegistrationName.$touched && teacherRegistration.teacherRegistrationName.$invalid,
                                     'has-success': teacherRegistration.teacherRegistrationName.$valid
@@ -18,7 +19,7 @@
                     <input type="text"
                            class="form-control"
                            id="teacherRegistrationName"
-                           name="teacherRegistrationName"
+                           name="name"
                            ng-model="teacher.name"
                            placeholder="Teacher Name"
                            required
@@ -33,7 +34,7 @@
                     <input type="text"
                            class="form-control"
                            id="teacherRegistrationEmail"
-                           name="teacherRegistrationEmail"
+                           name="email"
                            ng-model="teacher.email"
                            placeholder="Email"
                            required
@@ -48,7 +49,7 @@
                     <input type="text"
                            class="form-control"
                            id="teacherRegistrationContact"
-                           name="teacherRegistrationContact"
+                           name="contact"
                            ng-model="teacher.contact"
                            placeholder="Contact No."
                            ng-pattern="/^[0-9]{4}-[0-9]{7}$/"
@@ -64,22 +65,30 @@
                     <input type="text"
                            class="form-control"
                            id="teacherRegistrationDepartment"
-                           name="teacherRegistrationDepartment"
+                           name="department"
                            ng-model="teacher.dept"
                            placeholder="Department"
                            required
                     />
                     <i class="glyphicon glyphicon-education form-control-feedback"></i>
                     
-                    <input style="margin: 15px 0" type="file" class="form-control pull-right"  placeholder="Teacher's Photo'"/>
+                    <input style="margin: 15px 0" type="file" class="form-control pull-right" 
+                     ngf-select="uploadFiles($file, $invalidFiles)" name="avatar"
+                     accept="image/*" ngf-max-height="1000" ngf-max-size="1MB"   
+                     placeholder="Teacher's Photo"/>
                 </div>
                 <!--<p class="{{errclass}}">{{errmsg}}</p>-->
                 <p style=" margin:10px 0; border-radius: 20px; font-weight: bold; opacity=0.75;" class = {{msgclass}}>{{msg}}</p>
-                <button class="btn btn-lg btn-block" href="#/" role="button"
-                        ng-disabled="teacherRegistration.$invalid" ng-click="register()">SUBMIT</button>
+                <button type="submit" class="btn btn-lg btn-block" href="#/" role="button"
+                        ng-disabled="teacherRegistration.$invalid">SUBMIT</button>
                 <br>
-                <p>{{teacherEmail}}</p>
-                <img src="imgs/duet-down.png" class="img-responsive">
+                 <div style="font:smaller" ng-show="f.progress >= 0" class="text-center">File upload progress...
+                   <span class="progress" ng-show="f.progress >= 0">
+                    <div style="width:{{f.progress}}%"  
+                    ng-bind="f.progress + '%'"></div>
+                  </span>
+                 </div>     
+                <!--<img src="imgs/duet-down.png" class="img-responsive">-->
             </form>
         </div>
     </div>

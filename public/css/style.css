@@ -7,14 +7,20 @@
 #hodLogin,
 #studentRegistration,
 #studentLogin,
-#teacherRegistration,
-#hodForgot{
+#hodForgot {
     margin-top: 5%;
     background-color: #4e5256;
-    border-radius: 35% 0% 36% 0%;!important;
+    border-radius: 35% 0 36% 0 !important;
     opacity: 0.85;
 }
 
+#teacherRegistration{
+    margin-top: 100px;
+    background-color: #4e5256;
+    /*border-radius: 35% 0% 36% 0%;!important;*/
+    opacity: 0.85;
+}
+    
 form{
     padding: 15px;
 }
@@ -407,4 +413,27 @@ ul.pagination li a:focus{
 
 .c3-legend-item text {
     fill: white;
+}
+.thumb {
+    width: 24px;
+    height: 24px;
+    float: none;
+    position: relative;
+    top: 7px;
+}
+
+form .progress {
+    line-height: 15px;
+}
+
+.progress {
+    margin: 0;
+    display: inline-block;
+    width: 80%;
+    border: 3px groove #CCC;
+}
+
+.progress div {
+    font-size: smaller;
+    background: orange;
 }
