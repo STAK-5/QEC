@@ -2,7 +2,7 @@
  * Created by syedmuhammadtaha on 3/30/16.
  */
 
-qecApp.directive('bgImage', function ($window) {
+qecAppStudent.directive('bgImage', function ($window) {
     return function (scope, element, attrs) {
         var resizeBG = function () {
             var bgwidth = element.width();
@@ -38,10 +38,10 @@ qecApp.directive('bgImage', function ($window) {
         });
     }
 });
-qecApp.directive('starRating', function() {
+qecAppStudent.directive('starRating', function() {
     return {
         restrict: 'EA',
-        templateUrl: './stars.html',
+        templateUrl: './templates/stars.html',
         scope: {
             ratingValue: '=ngModel',
             max: '=?', // optional (default is 5)
