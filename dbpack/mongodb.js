@@ -77,12 +77,18 @@ module.exports = function(Schema, q){
             var teacherDts  = Schema({
                 name: teacherDetails.name,
                 email: teacherDetails.email,
+                contact: teacherDetails.contact,
                 department: teacherDetails.department,
-                survey_records: teacherDetails.survey_records,
-                total_averages: teacherDetails.total_averages,
-                current_average: teacherDetails.current_average,
-                max_average: teacherDetails.max_average,
-                contact: teacherDetails.contact
+
+                survey_records: teacherDetails.survey_records || [],
+                total_averages: teacherDetails.total_averages || [],
+                current_average: teacherDetails.current_average || null,
+                max_average: teacherDetails.max_average || null,
+
+                ph_originalname: teacherDetails.ph_originalname,
+                ph_mimetype: teacherDetails.ph_mimetype,
+                ph_curname: teacherDetails.ph_curname, 
+                ph_size: teacherDetails.ph_size    
             });
 
 
@@ -115,7 +121,16 @@ module.exports = function(Schema, q){
             });
             return promise.promise;
         },
-
+        getallteacher: function(){
+            var promise = q.defer();
+            
+            Schema.find({}, function(err, result){
+                if(err) promise.reject(err);
+                else promise.resolve(result);                     
+        })
+        return promise.promise;    
+    },
+        
         getTeacherDetails: function(queryDetails){
             var promise = q.defer();
             Schema.findOne({name: queryDetails.name},function(err, result){

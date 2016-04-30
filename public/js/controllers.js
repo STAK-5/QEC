@@ -13,8 +13,18 @@ qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherM
     function ($scope, $routeParams, teacherMaker, teacherParser, $http, $log, $location, $timeout, graphDetails, $window) {
 
         console.info("On HOD");
-        $scope.teachers = teacherMaker;
-
+        $scope.teachers;
+        
+        $http.get('/api/getteachers')
+            .success(function(response){
+                // response is array of objects- while objects are teachers.;
+                console.info('found something on get request', response);
+                $scope.teacher = response;
+                console.info('found something on get request and  now is in scope', $scope.teacher); // test it
+            }).error(function(data, status){
+                console.error(status, data);
+            });
+        
         $scope.value = teacherParser.value;
         $scope.graphValue = null;
 
@@ -48,7 +58,7 @@ qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherM
             })
         }
         $scope.error = 404;
-        $scope.msg = "404. Not Foound";
+        $scope.msg = "404. Not Found";
 
     }]);
 qecApp.controller('sliderController', ['$scope', '$timeout', 'QueueService', function ($scope, $timeout, QueueService) {
@@ -225,9 +235,9 @@ qecApp.controller('studentRegistrationController', ['$scope', '$log', '$location
             $timeout(function () {
                 $log.info('count down to 5');
                 $scope.msg = 'REGISTRATION';
-                $scope.errclass = '';
             }, 5000);
 
+                $scope.errclass = '';
         };
         $scope.addLocalAccount = function () {
             $scope.errclass = 'alert alert-info text-center';
@@ -244,7 +254,6 @@ qecApp.controller('studentRegistrationController', ['$scope', '$log', '$location
                 $scope.printMessage(error.msg, 'alert alert-danger text-center')
             });
         }
-    }]);
 
 qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location', '$http', '$timeout','Upload',
     function ($scope, $log, $location, $http, $timeout, Upload) {
@@ -258,7 +267,7 @@ qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location
         $scope.errFile = errFiles && errFiles[0];
         if (file) {
             file.upload = Upload.upload({
-                url: 'http://localhost:3301/api/filecheck',
+                url: 'http://localhost:3301/api/teacher_reg',
                 data: {file: file}
             });
 
@@ -278,7 +287,7 @@ qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location
     
         $scope.register = function(){
             console.info('sending file to server: ', $scope.f);
-            $http.post('/api/uploadfile',{
+            $http.post('/api/teacher_reg',{
                 file:$scope.f
             }).success(function(res){
                 //do something
@@ -286,6 +295,8 @@ qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location
                 
             })
         }
+    }]);
+
         // $scope.printMessage = function (msg, msgclass) {
         //     $scope.msg = msg;
         //     $scope.msgclass = msgclass;

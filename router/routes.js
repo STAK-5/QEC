@@ -9,22 +9,53 @@ module.exports = function (app, express, mongoose) {
     var requestIp = require('request-ip');
     var sess;
     var title = 'HOD Login';
-
+    var server_msg = '';
     var multer = require('multer');
     var upload = multer({ dest: 'uploads/' })
 
 
-    router.post('/api/fileupload', upload.single('avatar'), function (req, res, next) {
+    router.post('/api/teacher_reg', upload.single('avatar'), function (req, res, next) {
         console.log('file upload attempts _active');
         console.log('form content: ', req.body);
         console.log('form files: ', req.file);
-        // req.file.name = req.file.originalname;
-        //console.log('form files: ', req.files);
-        if(req.file != undefined || req.file != {}){
-            res.status(200).send({response: 'File uploaded.'});            
-            
+        
+        /*VALIDATION ON PENDING - DIRECT SENDING TO SERVER AT THE MOMENT :)*/
+        req.checkBody('name', 'Account id is required').notEmpty();
+        req.checkBody('email', 'Email Not Valid').isEmail();
+        req.checkBody('contact', 'Contact should not be empty').notEmpty();
+        req.checkBody('department', 'Department not valid').notEmpty().len(2,3);
+        
+        
+        var formValidationErrors = req.validationErrors();
+        if(formValidationErrors)
+            res.status(500).send('<h2>'+formValidationErrors[0].msg+'</h2>');
+        else if(req.file==undefined || req.file ==null || req.file == {}){
+            console.log('Please Provide A Photo To Teacher\'s Profile ');
         }
+        else {
+            mongodb = require('./../dbpack/mongodb.js')(TeacherSchema, q);
 
+            var teacherDetails = {
+                name: req.body.name,
+                email: req.body.email,
+                contact: req.body.contact,
+                department: req.body.department,
+                ph_originalname: req.file.originalname,
+                ph_mimetype: req.file.mimetype,
+                ph_curname: req.file.filename,
+                ph_size: req.file.size
+            }
+            
+            console.log('Simplified Teacher Object:  ', teacherDetails);
+            mongodb.saveTeacherData(teacherDetails)
+            .then(function (result) {
+                console.log('Teacher Saved', result);
+                res.status(result.status).send(result.msg);
+                }, function (error) {
+                res.status(error.status).send(error.msg);
+            });
+    }
+            
     });
     router.get('/', function (req, res, next) {
         console.log('[SESSIONS] value: ', req.session.login);
@@ -43,7 +74,19 @@ module.exports = function (app, express, mongoose) {
         res.send('Not found');
     });
 
-
+    router.get('/api/getteachers', function(req, res, next){
+        mongodb = require('./../dbpack/mongodb.js')(TeacherSchema, q);
+        
+        mongodb.getallteacher()
+            .then(function(result){
+                // on result
+                res.status(200).send(result);
+                
+            }, function(err){
+                res.status(500).send(err);
+            })
+            
+    })
     router.post('/api/hodlogin', function (req, res, next) {
         console.log('sessions : ', req.session.login);
         mongodb = require('./../dbpack/mongodb.js')(hodSchema, q);
@@ -125,7 +168,6 @@ module.exports = function (app, express, mongoose) {
     });
 
     router.post('/api/teacher_registration', function (req, res) {
-        mongodb = require('./../dbpack/mongodb.js')(TeacherSchema, q);
 
         ///*VALIDATION ON PENDING - DIRECT SENDING TO SERVER AT THE MOMENT :)*/
         //req.checkBody('name', 'Account id is required').notEmpty();
@@ -137,6 +179,7 @@ module.exports = function (app, express, mongoose) {
         //var formValidationErrors = req.validationErrors();
         //if (formValidationErrors) res.status(502).send({msg: 'Field Provided Not Valid'});
         //else {
+        mongodb = require('./../dbpack/mongodb.js')(TeacherSchema, q);
 
         console.log('request body ', req.body);
         mongodb.saveTeacherData(req.body)
