@@ -11,7 +11,7 @@ module.exports = function (app, express, mongoose) {
     var title = 'HOD Login';
     var server_msg = '';
     var multer = require('multer');
-    var upload = multer({ dest: 'uploads/' })
+    var upload = multer({ dest: 'public/imgs/uploaded/' })
 
 
     router.post('/api/teacher_reg', upload.single('avatar'), function (req, res, next) {

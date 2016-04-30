@@ -9,18 +9,30 @@ qecApp.controller('forgotLoginController', ['$scope', '$routeParams', function (
 
 }]);
 
-qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherMaker', 'teacherParser', '$http', '$log', '$location', '$timeout', 'graphDetails', '$window',
+qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherMaker', 'teacherParser', 
+'$http', '$log', '$location', '$timeout', 'graphDetails', '$window',
     function ($scope, $routeParams, teacherMaker, teacherParser, $http, $log, $location, $timeout, graphDetails, $window) {
 
         console.info("On HOD");
         $scope.teachers;
+        $scope.teachers = {
+            firstRow: [],
+            secondRow: []
+        }
         
         $http.get('/api/getteachers')
             .success(function(response){
                 // response is array of objects- while objects are teachers.;
                 console.info('found something on get request', response);
-                $scope.teacher = response;
-                console.info('found something on get request and  now is in scope', $scope.teacher); // test it
+                
+                $scope.teachers.firstRow = response.slice(0, 6);
+                if(response.length <= 12) {
+                    $scope.teachers.secondRow = response.slice(6, response.length);
+                }
+                else if(response.length > 12){
+                    $scope.teachers.secondRow = response.slice(6, 12);
+                }
+                console.info('found something on get request and  now is in scope', $scope.teachers); // test it
             }).error(function(data, status){
                 console.error(status, data);
             });
@@ -61,7 +73,8 @@ qecApp.controller('hodDashboardController', ['$scope', '$routeParams', 'teacherM
         $scope.msg = "404. Not Found";
 
     }]);
-qecApp.controller('sliderController', ['$scope', '$timeout', 'QueueService', function ($scope, $timeout, QueueService) {
+    
+    qecApp.controller('sliderController', ['$scope', '$timeout', 'QueueService', function ($scope, $timeout, QueueService) {
 
 
     var INTERVAL = 5000,
@@ -254,16 +267,17 @@ qecApp.controller('studentRegistrationController', ['$scope', '$log', '$location
                 $scope.printMessage(error.msg, 'alert alert-danger text-center')
             });
         }
+    }]);
 
 qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location', '$http', '$timeout','Upload',
-    function ($scope, $log, $location, $http, $timeout, Upload) {
+    function($scope, $log, $location, $http, $timeout, Upload) {
         
         console.info('ready to upload file.');
         
         $scope.f = '';
         $scope.uploadFiles = function(file, errFiles) {
         $scope.f = file;
-    console.log('got file from form:' ,file)
+        console.log('got file from form:' ,file)
         $scope.errFile = errFiles && errFiles[0];
         if (file) {
             file.upload = Upload.upload({
@@ -331,4 +345,3 @@ qecApp.controller('teacherRegistrationController', ['$scope', '$log', '$location
 
         //     })
         // }
-    }]);
